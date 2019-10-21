@@ -2,6 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
+
+import { HeaderModule } from './header/header.module';
+import { FooterModule } from './footer/footer.module';
+import { CourseModule } from './course/course.module';
+import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
+
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -10,7 +16,11 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HeaderModule,
+    FooterModule,
+    CourseModule,
+    BreadcrumbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
