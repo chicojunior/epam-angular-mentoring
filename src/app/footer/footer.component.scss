@@ -1,0 +1,11 @@
+@import '../../mixins.scss';
+@import '../../variables.scss';
+
+:host {
+  background-color: $app-bg-black;
+  color: #ffffff;
+  flex: none;
+  text-align: end;
+
+  @include content-padding;
+}

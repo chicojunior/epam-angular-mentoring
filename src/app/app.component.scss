@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=latin-ext');
+
+@import '../mixins.scss';
+@import '../variables.scss';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+  width: 100%;
+
+  .vd-course {
+    width: 100%;
+
+    &__breadcrumb {
+      background-color: $app-white;
+      flex: 1;
+
+      @include content-padding;
+    }
+
+    &__courses {
+      background-color: $app-bg-gray;
+      flex: 5;
+
+      @include content-padding;
+    }
+  }
+}
