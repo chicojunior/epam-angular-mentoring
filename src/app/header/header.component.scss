@@ -16,7 +16,7 @@
       align-items: center;
 
       img {
-        height: 50px;
+        height: 46px;
         margin-right: 20px;
       }
 
@@ -29,6 +29,7 @@
     .user-container {
       display: flex;
       align-items: center;
+      font-size: 14px;
 
       a {
         text-decoration: none;
@@ -44,8 +45,10 @@
     }
   }
 
-  .user-icon {
-    height: 20px;
+  .user-icon,
+  .logout-icon {
+    height: 14px;
+    margin-right: 6px;
   }
 
 

@@ -1,1 +1,24 @@
-<p>course-item works!</p>
+<mat-card>
+  <mat-card-content>
+    <div class="row header">
+      <h2 class="header__title">{{ course.title }}</h2>
+      <div class="header__details">
+        <span class="detail-span"><i class="material-icons">schedule</i> {{ course.duration }}</span>
+        <span class="detail-span"><i class="material-icons">date_range</i> {{ course.creationDate }}</span>
+      </div>
+    </div>
+    <div class="row content">
+      <p class="content__description">{{ course.description }}</p>
+      <div class="content__actions">
+        <button class="action-button">
+          <i class="material-icons">edit</i>
+          <span>Edit</span>
+        </button>
+        <button class="action-button" (click)="deleteItem(course)">
+          <i class="material-icons">delete</i>
+          <span>Delete</span>
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,15 +1,23 @@
 <section>
   <div class="row course__search">
-    <input class="search__input" type="text" placeholder="Text to search">
-    <button class="search__button">Search</button>
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Course</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Text to search" [(ngModel)]="courseInput">
+    </mat-form-field>
+    <button class="search__button" (click)="searchCourse(courseInput)">Search</button>
   </div>
 
   <div class="row course__add">
-      <button><span>+</span> Add course</button>
+      <button><i class="material-icons">add</i> Add course</button>
+  </div>
+
+  <div class="row" *ngFor="let course of courses">
+    <app-course-item [course]="course" (deleteCourse)="deleteCourse($event)"></app-course-item>
   </div>
 
   <div class="row">
-    <p>courses</p>
+    <mat-card class="load-more-card"><a href="#" (click)="loadMore($event)">LOAD_MORE</a></mat-card>
   </div>
 </section>
 

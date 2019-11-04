@@ -2,12 +2,13 @@
 @import '../../../variables.scss';
 
 :host {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
   background-color: $app-bg-gray;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
 
   section {
+    margin-bottom: 30px;
     width: 100%;
   }
 
@@ -23,40 +24,61 @@
 
   .course {
     &__search {
-      margin-top: 20px;
-      justify-content: flex-start;
       align-items: center;
       height: 46px;
+      justify-content: flex-start;
+      margin-top: 20px;
     }
 
     &__add {
       justify-content: flex-end;
 
       button {
-        background-color: #30b6db;
+        align-items: center;
+        background-color: $app-blue;
         color: #ffffff;
-        height: 40px;
+        display: flex;
+        height: 34px;
+        justify-content: center;
         width: 140px;
+      }
+
+      .material-icons {
+        margin-right: 8px;
       }
     }
   }
 
   .search {
-    &__input {
-      border: 1px solid #cccccc;
-      border-radius: 4px;
-      height: 100%;
-      width: 270px;
-      margin-right: 10px;
-    }
 
     &__button {
-      height: 100%;
-      background-color: #9bc837;
+      background-color: $app-green;
       color: #ffffff;
+      height: 100%;
       width: 100px;
     }
+
+  }
+
+  .load-more-card {
+    width: 100%;
+    text-align: center;
   }
 
   @include content-padding;
+}
+
+:host ::ng-deep {
+
+  mat-form-field {
+    margin-right: 14px;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0;
+    background-color: #ffffff;
+    color: #cccccc;
+    font-size: 14px;
+    width: 360px;
+  }
 }

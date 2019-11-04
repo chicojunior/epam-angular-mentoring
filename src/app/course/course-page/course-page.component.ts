@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { ICourse } from '../../common/course.interface';
+
+import { COURSES } from '../../common/constants/course-page.constants';
 
 @Component({
   selector: 'app-course-page',
@@ -9,12 +11,26 @@ import { ICourse } from '../../common/course.interface';
 })
 
 export class CoursePageComponent implements OnInit {
-
-  courses: ICourse[] = [];
+  public courses: ICourse[] = [];
+  public courseInput: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.courses = COURSES;
+  }
+
+  searchCourse(searchText: string) {
+    console.log(searchText);
+  }
+
+  deleteCourse(courseId: number) {
+    console.log(courseId);
+  }
+
+  loadMore(evt: MouseEvent) {
+    evt.preventDefault();
+    console.log(evt);
   }
 
 }
