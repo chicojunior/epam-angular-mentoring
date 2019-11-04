@@ -1,3 +1,62 @@
+@import '../../../mixins.scss';
+@import '../../../variables.scss';
+
 :host {
-  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  background-color: $app-bg-gray;
+
+  section {
+    width: 100%;
+  }
+
+  button {
+    border: none;
+    border-radius: 4px;
+  }
+
+  .row {
+    display: flex;
+    width: 100%;
+  }
+
+  .course {
+    &__search {
+      margin-top: 20px;
+      justify-content: flex-start;
+      align-items: center;
+      height: 46px;
+    }
+
+    &__add {
+      justify-content: flex-end;
+
+      button {
+        background-color: #30b6db;
+        color: #ffffff;
+        height: 40px;
+        width: 140px;
+      }
+    }
+  }
+
+  .search {
+    &__input {
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      height: 100%;
+      width: 270px;
+      margin-right: 10px;
+    }
+
+    &__button {
+      height: 100%;
+      background-color: #9bc837;
+      color: #ffffff;
+      width: 100px;
+    }
+  }
+
+  @include content-padding;
 }

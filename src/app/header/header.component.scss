@@ -7,6 +7,45 @@
 
   header {
     display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+
+      img {
+        height: 50px;
+        margin-right: 20px;
+      }
+
+      span {
+        text-transform: uppercase;
+        height: fit-content;
+      }
+    }
+
+    .user-container {
+      display: flex;
+      align-items: center;
+
+      a {
+        text-decoration: none;
+        color: $app-white;
+      }
+
+      .login,
+      .logout {
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .user-icon {
+    height: 20px;
   }
 
 
