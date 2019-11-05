@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$vc-app-primary-green: mat-palette($mat-light-green, 500);
+$vc-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+
+$vc-app-theme: mat-light-theme($vc-app-primary-green, $vc-app-accent);
+
+@include angular-material-theme($vc-app-theme);
+

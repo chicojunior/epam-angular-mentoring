@@ -1,0 +1,93 @@
+@import '../../../variables.scss';
+
+:host {
+  width: 100%;
+  margin: 20px 0;
+
+  .row {
+    margin: 0 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .header {
+
+    &__title {
+      flex: 2;
+    }
+
+    &__details {
+      display: flex;
+      flex: 1;
+      color: #A3A3A3;
+    }
+
+
+  }
+
+  .detail-span {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+
+    i {
+      margin-right: 4px;
+    }
+  }
+
+  .content {
+
+    &__description {
+      display: flex;
+      flex: 4;
+      justify-content: flex-start;
+    }
+
+    &__actions {
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .action-button {
+      display: flex;
+      font-size: 14px;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 4px;
+      margin: 0 5px;
+      min-width: 90px;
+      height: 32px;
+      background-color: $app-blue;
+      color: #ffffff;
+
+      .material-icons {
+        margin-right: 4px;
+        font-size: 19px;
+      }
+    }
+  }
+
+}
+
+:host ::ng-deep {
+
+  mat-card-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  mat-card-title {
+    display: flex;
+    flex: 2;
+    width: fit-content;
+  }
+
+  mat-card-subtitle {
+    display: flex;
+    flex: 1;
+    width: fit-content;
+  }
+
+}

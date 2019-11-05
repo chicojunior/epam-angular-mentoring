@@ -9,6 +9,7 @@ import { CourseModule } from './course/course.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AppComponent } from './app.component';
     HeaderModule,
     FooterModule,
     CourseModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
