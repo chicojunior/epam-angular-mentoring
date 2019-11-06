@@ -14,26 +14,9 @@ import { CourseItemComponent } from '../course-item/course-item.component';
 import { ICourse } from 'src/app/common/course.interface';
 import { COURSE } from 'src/app/common/mock/course';
 
-@Component({
-  template: `
-    <app-course-item
-      [course]="course">
-      <button
-        class="delete-button"
-        (click)="deleteCourse(course)">
-        Delete
-      </button>
-    </app-course-item>
-  `
-})
-
-class CourseItemTestComponent {
-  public course: ICourse = COURSE;
-  public courseId: number;
-  public deleteCourse(course: ICourse) { this.courseId = course.id; }
-}
-
 describe('CoursePageComponent', () => {
+  const course: ICourse = COURSE;
+
   let component: CoursePageComponent;
   let fixture: ComponentFixture<CoursePageComponent>;
 
@@ -60,6 +43,16 @@ describe('CoursePageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call deleteCourse method', () => {
+    const nativeElement: HTMLElement = fixture.nativeElement;
+    const button: HTMLElement = nativeElement.querySelector('.delete-button');
+
+    spyOn(component, 'deleteCourse');
+    button.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    expect(component.deleteCourse).toHaveBeenCalledWith(course.id);
   });
 
 });

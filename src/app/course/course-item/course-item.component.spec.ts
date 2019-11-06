@@ -24,6 +24,7 @@ class CourseItemTestComponent {
 
 describe('CourseItemComponent', () => {
   const course: ICourse = COURSE;
+
   let component: CourseItemComponent;
   let fixture: ComponentFixture<CourseItemComponent>;
 
@@ -47,9 +48,10 @@ describe('CourseItemComponent', () => {
   });
 
   it('should have a title', () => {
-    fixture.detectChanges();
     const nativeElement: HTMLElement = fixture.nativeElement;
     const headerTitle: HTMLElement = nativeElement.querySelector('.header__title');
+
+    fixture.detectChanges();
 
     expect(headerTitle.textContent).toBeTruthy();
   });
@@ -89,6 +91,7 @@ describe('CourseItemTestComponent', () => {
   it('should call parent deleteCourse method', () => {
     const nativeElement: HTMLElement = parentFixture.nativeElement;
     const button: HTMLElement = nativeElement.querySelector('.delete-button');
+
     spyOn(parentComponent, 'deleteCourse');
     button.dispatchEvent(new Event('click'));
     parentFixture.detectChanges();
