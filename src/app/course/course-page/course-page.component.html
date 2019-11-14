@@ -12,12 +12,21 @@
       <button><i class="material-icons">add</i> Add course</button>
   </div>
 
-  <div class="row" *ngFor="let course of courses">
-    <app-course-item [course]="course" (deleteCourse)="deleteCourse($event)"></app-course-item>
+  <div *ngIf="courses.length; else noCourses">
+    <div class="row" *ngFor="let course of courses">
+      <app-course-item [course]="course" (deleteCourse)="deleteCourse($event)"></app-course-item>
+    </div>
+
+    <div class="row">
+      <mat-card class="message-card"><a href="#" (click)="loadMore($event)">LOAD_MORE</a></mat-card>
+    </div>
   </div>
 
-  <div class="row">
-    <mat-card class="load-more-card"><a href="#" (click)="loadMore($event)">LOAD_MORE</a></mat-card>
-  </div>
+  <ng-template #noCourses>
+    <div class="row">
+      <mat-card class="message-card">{{ noDataMessage | uppercase }}</mat-card>
+    </div>
+  </ng-template>
+
 </section>
 

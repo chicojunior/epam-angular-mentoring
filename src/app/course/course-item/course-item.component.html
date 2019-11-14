@@ -3,8 +3,8 @@
     <div class="row header">
       <h2 class="header__title">{{ course.title }}</h2>
       <div class="header__details">
-        <span class="detail-span"><i class="material-icons">schedule</i> {{ course.duration }}</span>
-        <span class="detail-span"><i class="material-icons">date_range</i> {{ course.creationDate }}</span>
+        <span class="detail-span"><i class="material-icons">schedule</i> {{ course.duration | courseDuration: course.duration }}</span>
+        <span class="detail-span"><i class="material-icons">date_range</i> {{ course.creationDate | date }}</span>
       </div>
     </div>
     <div class="row content">

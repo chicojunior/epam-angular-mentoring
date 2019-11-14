@@ -13,6 +13,7 @@ import { COURSES } from '../../common/constants/course-page.constants';
 export class CoursePageComponent implements OnInit {
   public courses: ICourse[] = [];
   public courseInput: string;
+  public noDataMessage = 'no data, feel free to add new course';
 
   constructor() { }
 
