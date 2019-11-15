@@ -79,6 +79,15 @@
     }
   }
 
+  .top-rated {
+    background-color: $app-bg-pale;
+  }
+
+  .star-img {
+    width: 20px;
+    margin-left: 6px;
+  }
+
 }
 
 :host ::ng-deep {

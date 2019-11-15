@@ -5,6 +5,7 @@ export const COURSE: ICourse = {
   title: 'Test Course',
   description: 'A course created to this test',
   creationDate: new Date(),
-  duration: 90
+  duration: 90,
+  topRated: false
 };
 

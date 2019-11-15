@@ -1,7 +1,16 @@
-<mat-card [appBorderHighlight]="course.creationDate">
+<mat-card
+  [appBorderHighlight]="course.creationDate"
+  [ngClass]="{'top-rated': course.topRated}">
   <mat-card-content>
     <div class="row header">
-      <h2 class="header__title">{{ course.title | uppercase }}</h2>
+      <h2 class="header__title">
+        {{ course.title | uppercase }}
+        <img
+          class="star-img"
+          *ngIf="course.topRated"
+          src="assets/img/star.png"
+          alt="top rated star">
+      </h2>
       <div class="header__details">
         <span class="detail-span"
           ><i class="material-icons">schedule</i>
