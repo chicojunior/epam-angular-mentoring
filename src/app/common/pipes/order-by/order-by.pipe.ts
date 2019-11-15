@@ -7,7 +7,7 @@ import { ICourse } from '../../course.interface';
 })
 export class OrderByPipe implements PipeTransform {
 
-  transform(courseList: ICourse[], param: string): ICourse[] {
+  transform(courseList: ICourse[], param: keyof ICourse): ICourse[] {
     return courseList.sort((a, b) => a[param] < b[param] ? -1 : a[param] > b[param] ? 1 : 0);
   }
 
