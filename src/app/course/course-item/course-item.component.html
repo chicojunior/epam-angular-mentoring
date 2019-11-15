@@ -3,8 +3,14 @@
     <div class="row header">
       <h2 class="header__title">{{ course.title | uppercase }}</h2>
       <div class="header__details">
-        <span class="detail-span"><i class="material-icons">schedule</i> {{ course.duration | courseDuration }}</span>
-        <span class="detail-span"><i class="material-icons">date_range</i> {{ course.creationDate | date }}</span>
+        <span class="detail-span"
+          ><i class="material-icons">schedule</i>
+          {{ course.duration | courseDuration }}</span
+        >
+        <span class="detail-span"
+          ><i class="material-icons">date_range</i>
+          {{ course.creationDate | date }}</span
+        >
       </div>
     </div>
     <div class="row content">
@@ -14,7 +20,10 @@
           <i class="material-icons">edit</i>
           <span>Edit</span>
         </button>
-        <button class="action-button delete-button" (click)="deleteItem(course)">
+        <button
+          class="action-button delete-button"
+          (click)="deleteItem(course)"
+        >
           <i class="material-icons">delete</i>
           <span>Delete</span>
         </button>
