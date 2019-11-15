@@ -2,9 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 
+
+
 import { CourseItemComponent } from './course-item.component';
 import { ICourse } from 'src/app/common/course.interface';
 import { COURSE } from 'src/app/common/mock/course';
+import { BorderHighlightModule } from '../../common/directives/border-highlight/border-highlight.module';
+import { CourseDurationPipeModule } from '../../common/pipes/course-duration.pipe.module';
+
 
 @Component({
   template: `
@@ -31,7 +36,7 @@ describe('CourseItemComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CourseItemComponent ],
-      imports: [ MatCardModule ]
+      imports: [ MatCardModule, BorderHighlightModule, CourseDurationPipeModule ]
     })
     .compileComponents();
   }));
@@ -74,6 +79,7 @@ describe('CourseItemTestComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CourseItemTestComponent, CourseItemComponent ],
+      imports: [ BorderHighlightModule, CourseDurationPipeModule ],
       schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
     }).compileComponents();
   }));

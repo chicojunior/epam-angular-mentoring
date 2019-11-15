@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import { CourseDurationPipeModule } from '../common/pipes/course-duration.pipe.module';
+import { BorderHighlightModule } from '../common/directives/border-highlight/border-highlight.module';
 
 import { CoursePageComponent } from './course-page/course-page.component';
 import { CourseItemComponent } from './course-item/course-item.component';
@@ -26,7 +27,8 @@ import { CourseItemComponent } from './course-item/course-item.component';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    CourseDurationPipeModule
+    CourseDurationPipeModule,
+    BorderHighlightModule
   ],
   exports: [CoursePageComponent]
 })

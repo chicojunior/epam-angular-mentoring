@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,8 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoursePageComponent } from './course-page.component';
 import { CourseItemComponent } from '../course-item/course-item.component';
 
+import { BorderHighlightModule } from '../../common/directives/border-highlight/border-highlight.module';
+
 import { ICourse } from 'src/app/common/course.interface';
 import { COURSE } from 'src/app/common/mock/course';
+import { CourseDurationPipeModule } from '../../common/pipes/course-duration.pipe.module';
 
 describe('CoursePageComponent', () => {
   const course: ICourse = COURSE;
@@ -29,7 +31,9 @@ describe('CoursePageComponent', () => {
         MatCardModule,
         MatIconModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        BorderHighlightModule,
+        CourseDurationPipeModule
       ]
     })
     .compileComponents();

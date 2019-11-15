@@ -5,7 +5,7 @@ export const COURSES = [
     // tslint:disable-next-line: max-line-length
     description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course decriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain desciprions for all courses offered.`,
     duration: 90,
-    creationDate: new Date()
+    creationDate: new Date(2019, 6, 22)
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export const COURSES = [
     // tslint:disable-next-line: max-line-length
     description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course decriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain desciprions for all courses offered.`,
     duration: 45,
-    creationDate: new Date()
+    creationDate: new Date(2019, 10, 7)
   },
   {
     id: 3,
@@ -21,6 +21,6 @@ export const COURSES = [
     // tslint:disable-next-line: max-line-length
     description: `Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course decriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain desciprions for all courses offered.`,
     duration: 175,
-    creationDate: new Date()
+    creationDate: new Date(2020, 2, 1)
   }
 ];

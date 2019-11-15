@@ -10,6 +10,16 @@
     align-items: center;
   }
 
+  .course-status {
+    &--fresh {
+      border: 2px solid $app-blue;
+    }
+
+    &--upcoming {
+      border: 2px solid $app-green;
+    }
+  }
+
   .header {
 
     &__title {

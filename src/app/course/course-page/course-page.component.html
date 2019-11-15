@@ -1,24 +1,34 @@
 <section>
   <div class="row course__search">
-    <mat-form-field appearance="outline" color="primary">
+    <mat-form-field appearance="outline"
+                    color="primary">
       <mat-label>Course</mat-label>
       <mat-icon matPrefix>search</mat-icon>
-      <input matInput placeholder="Text to search" [(ngModel)]="courseInput">
+      <input matInput
+             placeholder="Text to search"
+             [(ngModel)]="courseInput" />
     </mat-form-field>
-    <button class="search__button" (click)="searchCourse(courseInput)">Search</button>
+    <button class="search__button"
+            (click)="searchCourse(courseInput)">
+      Search
+    </button>
   </div>
 
   <div class="row course__add">
-      <button><i class="material-icons">add</i> Add course</button>
+    <button><i class="material-icons">add</i> Add course</button>
   </div>
 
   <div *ngIf="courses.length; else noCourses">
-    <div class="row" *ngFor="let course of courses">
-      <app-course-item [course]="course" (deleteCourse)="deleteCourse($event)"></app-course-item>
+    <div class="row"
+         *ngFor="let course of courses">
+      <app-course-item [course]="course"
+                       (deleteCourse)="deleteCourse($event)">
+      </app-course-item>
     </div>
 
     <div class="row">
-      <mat-card class="message-card"><a href="#" (click)="loadMore($event)">LOAD_MORE</a></mat-card>
+      <mat-card class="message-card"><a href="#"
+           (click)="loadMore($event)">LOAD_MORE</a></mat-card>
     </div>
   </div>
 
@@ -27,6 +37,4 @@
       <mat-card class="message-card">{{ noDataMessage | uppercase }}</mat-card>
     </div>
   </ng-template>
-
 </section>
-
