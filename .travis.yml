@@ -9,7 +9,7 @@ script:
   - ng test --no-watch --no-progress --browsers ChromeHeadlessCI
   - ng build --prod
 after_success:
-  - firebase deploy --token HLiQWscNeG3JOvVLKBGpVCbSaDhKD5thtO0jC7U+bFY+1xkcbXl/4F2+9QebKK8zDV7D62KeFVZjP8Yd3Ao7Ik8LfzBRxBKSSx5qme/A71E7OkI7gYPrpoiDvCsAs3uA5HLl3jJQm3WianpSbXOjgH03oDNxVHtNd3rC+MxDzzac4tnuZAeX+3pHUiIJ8ERCW2mKcFGgPzhx71UZr4e+OdyzC0QXnhPUIBUzUb4eE0Jey3UeNp3S5kknUlmKrKREtgKwaRptnOI/fo5ZpaUlycUspunV8OYRPnZfjg4h3X29Ab31KIa25UT2tCL7hYXKENHcRhBkZnH8LmAED81HCGs9cUCyv5oo7xB/o2CIAsUFiQqfu0ovXWoP6xXKNBUA6ecaNA5zR3e1M5MrrdD2M3JiSClMo+r7Qp1q9Xib9NdbKHS0cczhwqZ2l7tglSLc3Pq5uFFxHzjttojuTg3KWAizY3uJJ8LDku24EaXZBc2vEEH7G+F1nn4IgSx6UVWVdKjMLO8t5qonIBKXaMdzgDLpyk9H9JEQEVbK9e0jHyIfsiXUZb34t7do8wfHye8N0OOssmiMDURxp6OEvZyenOY6/cu6UkWBzksL2FjK69hoTdfSUNEq8ArtCSkfuAGgKY3GNzxX2Ku7pzI2mMM4eG/z7AEQkPqmM5Hk5gAa9s8=
+  - firebase deploy --token 1//0cI6gmhHUemFyCgYIARAAGAwSNwF-L9IrC42zsC-0ecCwuWmf-Ng-vzFulzWlSEjb_pfSHBEE9gtKgDspYIOuB5MFHUe5GlRUCCA
 # deploy:
 #   provider: firebase
 #   token:
