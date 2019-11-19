@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '10'
+script:
+- ng lint
+- ng test --no-watch --no-progress --browsers ChromeHeadlessCI
+- ng build --prod
+
+deploy:
+
+  provider: firebase
+
+  token:
+
+    secure: Vm2kkDeO+sZIKCslDxLAkCJo6/9l8uLKI6nDD4CJqtcOKs2nA2s+N4msfCK5y6d90b28Jwj2z4GHfwgdoGjN+USdbqiMYuhMGxTJK68TLXPaFx9aYnxBaBk6O4fO6Hf9MkaeYnQqsvHAz0NX3+ZKZOxxhzMzxUe4S3s0Xs3UWL5zQxJoqCjqxqvHBYEb4+dO+PEtp0TJYfPQL5bJ8vsyL61HpU9BxhpoI3r8/kIgdwB6MTf2HWy+8Ti/4Hp0nQvyO4sO98WOMSbHTtaewXM3665DtazwqG6nUnwH1CC5qFJtMvEDNLPWg8Z0QdZd4cG8/IYUf34SczUGuYShimcMcrs25GJY3pW9z4jnz8moHiPRAhc0SkqtJG2CQ+I2u4GPSlmfZ2GdnFLJffdIF+dzhWsMCZC6ABndA7+MBraPrWjDSmneqD9NTBVMe3Ttjf4z5pRQCw/VwANsMoPDtApYDIWiW8a5pjFic35cAaXesS1vWYFdqfgvQRcGFbEcFEwYk4ookiOgu6EjcrnrNoEJRz8mfwaLKam0XaD9dzFAZMZ66NRRJbbPCV65rFwO0a9v7f1R1Ac53WnV76eu8vGn1ZxfxbE5niYypVS4vU0yY3D+7huZ5qCjl7pGet/TmQIj33i95uSvEwMDXYmLu3GhasJjYcr+IkP8lBEixovWWVE=
+
+message: "this is an automatic deployment by travis - CI as a result of pushing to master"
