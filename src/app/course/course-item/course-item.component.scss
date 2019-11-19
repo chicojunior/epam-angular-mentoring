@@ -10,6 +10,16 @@
     align-items: center;
   }
 
+  .course-status {
+    &--fresh {
+      border: 2px solid $app-blue;
+    }
+
+    &--upcoming {
+      border: 2px solid $app-green;
+    }
+  }
+
   .header {
 
     &__title {
@@ -67,6 +77,15 @@
         font-size: 16px;
       }
     }
+  }
+
+  .top-rated {
+    background-color: $app-bg-pale;
+  }
+
+  .star-img {
+    width: 20px;
+    margin-left: 6px;
   }
 
 }

@@ -1,18 +1,23 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { Component } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoursePageComponent } from './course-page.component';
 import { CourseItemComponent } from '../course-item/course-item.component';
 
+import { BorderHighlightModule } from '../../common/directives/border-highlight/border-highlight.module';
+
+import { CourseDurationPipeModule } from '../../common/pipes/course-duration.pipe.module';
+import { OrderByModule } from '../../common/pipes/order-by/order-by.module';
+
 import { ICourse } from 'src/app/common/course.interface';
 import { COURSE } from 'src/app/common/mock/course';
+
 
 describe('CoursePageComponent', () => {
   const course: ICourse = COURSE;
@@ -29,7 +34,10 @@ describe('CoursePageComponent', () => {
         MatCardModule,
         MatIconModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        BorderHighlightModule,
+        CourseDurationPipeModule,
+        OrderByModule
       ]
     })
     .compileComponents();
@@ -53,6 +61,12 @@ describe('CoursePageComponent', () => {
     button.dispatchEvent(new Event('click'));
     fixture.detectChanges();
     expect(component.deleteCourse).toHaveBeenCalledWith(course.id);
+  });
+
+  it('should test if string is empty', () => {
+    const testString = 'Not Empty String';
+
+    expect(component.isNotEmptyString(testString)).toBeTruthy();
   });
 
 });

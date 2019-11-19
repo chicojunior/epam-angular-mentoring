@@ -1,10 +1,25 @@
-<mat-card>
+<mat-card
+  [appBorderHighlight]="course.creationDate"
+  [ngClass]="{'top-rated': course.topRated}">
   <mat-card-content>
     <div class="row header">
-      <h2 class="header__title">{{ course.title }}</h2>
+      <h2 class="header__title">
+        {{ course.title | uppercase }}
+        <img
+          class="star-img"
+          *ngIf="course.topRated"
+          src="assets/img/star.png"
+          alt="top rated star">
+      </h2>
       <div class="header__details">
-        <span class="detail-span"><i class="material-icons">schedule</i> {{ course.duration }}</span>
-        <span class="detail-span"><i class="material-icons">date_range</i> {{ course.creationDate }}</span>
+        <span class="detail-span"
+          ><i class="material-icons">schedule</i>
+          {{ course.duration | courseDuration }}</span
+        >
+        <span class="detail-span"
+          ><i class="material-icons">date_range</i>
+          {{ course.creationDate | date }}</span
+        >
       </div>
     </div>
     <div class="row content">
@@ -14,7 +29,10 @@
           <i class="material-icons">edit</i>
           <span>Edit</span>
         </button>
-        <button class="action-button delete-button" (click)="deleteItem(course)">
+        <button
+          class="action-button delete-button"
+          (click)="deleteItem(course)"
+        >
           <i class="material-icons">delete</i>
           <span>Delete</span>
         </button>
