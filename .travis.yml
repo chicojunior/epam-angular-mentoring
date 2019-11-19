@@ -3,7 +3,7 @@ node_js:
 - '10'
 script:
 - ng lint
-- ng test --code-coverage=true
+- ng test --no-watch --no-progress --browsers ChromeHeadlessCI
 - ng build --prod
 
 deploy:
