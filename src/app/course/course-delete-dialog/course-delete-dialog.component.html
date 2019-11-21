@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>Delete</h1>
+
+<div mat-dialog-content>
+  <p>Do you really want to delete the course?</p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No</button>
+  <button
+    mat-button (click)="deleteCourse()"
+    cdkFocusInitial
+    color="primary">
+    Yes
+  </button>
+</div>
+
