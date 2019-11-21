@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ICourse } from '../../common/course.interface';
 
 import { COURSES } from '../../common/constants/course-page.constants';
+import { CourseService } from '../course.service';
 
 @Component({
   selector: 'app-course-page',
@@ -14,11 +15,11 @@ export class CoursePageComponent implements OnInit {
   public courseInput: string;
   public noDataMessage = 'no data, feel free to add new course';
 
-  constructor() {
-    this.courses = COURSES;
-  }
+  constructor(private courseService: CourseService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.courses = this.courseService.getCourseList();
+  }
 
   searchCourse(searchText: string): void {
     this.courses = this.isNotEmptyString(searchText) ? this.includesText(COURSES, searchText) : COURSES;
