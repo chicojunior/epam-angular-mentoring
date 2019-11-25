@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { Observable, BehaviorSubject } from 'rxjs';
 
 import { IUser } from '../user.interface';
 import { MOCK_USER } from '../mock/user';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { Router } from '@angular/router';
 
 
 @Injectable({

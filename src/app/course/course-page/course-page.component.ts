@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ICourse } from '../../common/course.interface';
-
-import { COURSES } from '../../common/constants/course-page.constants';
 import { CourseService } from '../course.service';
+
+import { ICourse } from '../../common/course.interface';
+import { COURSES } from '../../common/constants/course-page.constants';
 
 @Component({
   selector: 'app-course-page',

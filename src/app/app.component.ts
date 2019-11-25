@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { AuthService } from './common/services';
 
@@ -13,7 +12,7 @@ export class AppComponent implements OnInit {
 
   public isLogged: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
     this.authService.isLogged.subscribe(res => this.isLogged = res);

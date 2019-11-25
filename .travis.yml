@@ -10,4 +10,4 @@ script:
   - ng build --prod
 after_success:
   if: branch = master
-    - firebase deploy --token 1//0cI6gmhHUemFyCgYIARAAGAwSNwF-L9IrC42zsC-0ecCwuWmf-Ng-vzFulzWlSEjb_pfSHBEE9gtKgDspYIOuB5MFHUe5GlRUCCA
+    - firebase deploy --token APP_TOKEN

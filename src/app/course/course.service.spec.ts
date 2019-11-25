@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
+import { MatDialog } from '@angular/material/dialog';
 
 import { COURSES } from '../common/constants/course-page.constants';
 
 import { CourseService } from './course.service';
-import { MatDialog } from '@angular/material/dialog';
 
 describe('CourseService', () => {
 
