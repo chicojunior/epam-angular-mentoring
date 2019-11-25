@@ -29,7 +29,7 @@ export class CourseService {
   }
 
   deleteCourseDialog(courseList: ICourse[], courseId: string): Observable<ICourse[]> {
-    const dialogRef =  this.dialog
+    const dialogRef = this.dialog
       .open(CourseDeleteDialogComponent, {
         data: this.filterCourseList(courseList, courseId)
       });

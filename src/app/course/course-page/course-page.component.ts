@@ -32,7 +32,11 @@ export class CoursePageComponent implements OnInit {
   deleteCourse(courseId: string) {
     this.courseService
       .deleteCourse(this.courses, courseId)
-      .subscribe(res => this.courses = res);
+      .subscribe(res => {
+        if (res) {
+          this.courses = res;
+        }
+      });
   }
 
   loadMore(evt: MouseEvent) {

@@ -8,6 +8,7 @@ import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { CourseModule } from './course/course.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
+import { LoginModule } from './login/login.module';
 
 import { AppComponent } from './app.component';
 
@@ -20,7 +21,8 @@ import { AppComponent } from './app.component';
     FooterModule,
     CourseModule,
     BreadcrumbModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]
