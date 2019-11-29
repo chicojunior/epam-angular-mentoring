@@ -15,7 +15,7 @@ jobs:
       script:
         - npm install -g firebase-tools
         - ng build --prod
-        - firebase deploy --token APP_TOKEN
+        - firebase deploy --token "$APP_TOKEN"
 stages:
   - name: install
   - name: test
