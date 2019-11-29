@@ -9,4 +9,5 @@ script:
   - ng test --no-watch --no-progress --browsers ChromeHeadlessCI
   - ng build --prod
 after_success:
-  - firebase deploy --token 1//0cI6gmhHUemFyCgYIARAAGAwSNwF-L9IrC42zsC-0ecCwuWmf-Ng-vzFulzWlSEjb_pfSHBEE9gtKgDspYIOuB5MFHUe5GlRUCCA
+  if: branch = master
+    - firebase deploy --token APP_TOKEN
