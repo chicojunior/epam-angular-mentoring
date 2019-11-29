@@ -1,16 +1,23 @@
 language: node_js
 node_js:
 - '10'
-before_script:
-  - npm install -g @angular/cli
-  - npm install -g firebase-tools
-script:
-  - ng lint
-  - ng test --no-watch --no-progress --browsers ChromeHeadlessCI
-  - ng build --prod
-deploy:
-  provider: firebase
-  token:
-    secure: PzwbnW3mAhlc64eo+CtX3hLDGjHgFlzZOh54GTNR4TS+Jkb3op375oB7km3HmmUOQEs5KsXMjPLm4t6k8k6akvixaYSZ5C3TwXNKOrimqBmzqP7uN04vMIc+oXHRw8s/v4v25Z37zDWBqekvB1ONHeWvVjEIIHpdQXfF3C3EA9n7cKlsRs+G/T2yUPyN7bLTazKw5ggJ4UVTGmjywujkBkFWJuduI+BH3aw2nOgmHb/Cey0nZlj9zpnTw3qBNb0KH1MzgNMmDNjeKFpNOkkn8md3ln3JO+rda3N3eQuCz7uJQl32RlCOTScd7v8NMuXgluGguqYTfuStXz80vNb3Uf3vfqz7CRy2w+cS72MO9cmL8A58NdqdnPl3eIZHRggzLcAgaW5b3YB1vhRO0x46Yw0YdMZcVvTRY9/V4b5LqPtzSuDKlMDR4k/08bDFwVJhwPHM6+0gp9q6VPaoppb7MumLBviPShFwtsN51oEyfIHzqZw0l0jhrRQtSikiWAMZLiHCIrwIRqWtg3H1rVtyB1PrKqmBsdEts/bYc+gfJPGzU9YOQuFfYU3JI8gw7Qm4i6WGEwbOPOeK1ZZAiQFz5B1TuLCSQBZhci9PKYJlRP8GMGRqZ45fQPGzVCzOCT8fM+kYucow9fbmYD9RGtbNq5ntiU7g1Ilo8ZaCS7/Mkk8=
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: install
+      script:
+        - npm install -g @angular/cli
+        - npm install -g firebase-tools
+    - stage: test
+      script:
+        - ng lint
+        - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
+    - stage: deploy
+      script:
+        - ng build --prod
+        - firebase deploy --token APP_TOKEN
+stages:
+  - name: install
+  - name: test
+    if: type = pull_request
+  - name: deploy
+    if: branch = master
