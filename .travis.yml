@@ -8,6 +8,9 @@ script:
   - ng lint
   - ng test --no-watch --no-progress --browsers ChromeHeadlessCI
   - ng build --prod
-after_success:
-  if: branch = master
-    - firebase deploy --token APP_TOKEN
+deploy:
+  provider: firebase
+  token:
+    secure: APP_TOKEN
+  on:
+    branch: master

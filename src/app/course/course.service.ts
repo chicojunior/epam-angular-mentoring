@@ -16,12 +16,10 @@ export class CourseService {
   addCourse(course: ICourse): void {}
 
   updateCourse(courseList: ICourse[], updatedCourse: ICourse): ICourse[] {
-    return courseList.map(item => {
-      if (item.id === updatedCourse.id) {
-        item = updatedCourse;
-        return item;
-      }
-    });
+    return courseList.reduce((agg, cur) => [
+      agg,
+      cur.id === updatedCourse.id ? updatedCourse : cur
+    ], []);
   }
 
   deleteCourse(courseList: ICourse[], courseId: string): Observable<ICourse[]> {
@@ -46,7 +44,8 @@ export class CourseService {
   }
 
   includesText(list: ICourse[], text: string): ICourse[] {
-    return list.filter(item => item.title.includes(text));
+    const textToSearch = text.toLowerCase();
+    return list.filter(item => item.title.includes(textToSearch));
   }
 
   private filterCourseList(list: ICourse[], id: string): ICourse[] {
