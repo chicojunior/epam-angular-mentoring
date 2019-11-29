@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ICourse } from '../../common/course.interface';
-
-import { COURSES } from '../../common/constants/course-page.constants';
 import { CourseService } from '../course.service';
+
+import { ICourse } from '../../common/course.interface';
+import { COURSES } from '../../common/constants/course-page.constants';
 
 @Component({
   selector: 'app-course-page',
@@ -22,11 +22,21 @@ export class CoursePageComponent implements OnInit {
   }
 
   searchCourse(searchText: string): void {
-    this.courses = this.isNotEmptyString(searchText) ? this.includesText(COURSES, searchText) : COURSES;
+    this.courses = this.isNotEmptyString(searchText) ? this.courseService.includesText(COURSES, searchText) : COURSES;
   }
 
-  deleteCourse(courseId: number) {
-    console.log(courseId);
+  updateCourse(course: ICourse) {
+    this.courses = this.courseService.updateCourse(this.courses, course);
+  }
+
+  deleteCourse(courseId: string) {
+    this.courseService
+      .deleteCourse(this.courses, courseId)
+      .subscribe(res => {
+        if (res) {
+          this.courses = res;
+        }
+      });
   }
 
   loadMore(evt: MouseEvent) {
@@ -36,10 +46,6 @@ export class CoursePageComponent implements OnInit {
 
   isNotEmptyString(str: string): boolean {
     return str.trim().length !== 0;
-  }
-
-  private includesText(list: ICourse[], text: string): ICourse[] {
-    return list.filter(item => item.title.includes(text));
   }
 
 }

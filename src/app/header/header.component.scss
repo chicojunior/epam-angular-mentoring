@@ -4,11 +4,13 @@
 :host {
   background-color: $app-bg-black;
   color: #ffffff;
+  flex: 0;
 
   header {
     display: flex;
     flex-direction: row;
     width: 100%;
+    flex: 0;
     justify-content: space-between;
 
     .logo-container {
@@ -41,6 +43,7 @@
         margin: 0 10px;
         display: flex;
         align-items: center;
+        cursor: pointer;
       }
     }
   }

@@ -4,9 +4,9 @@
     <span>video course</span>
   </div>
 
-  <div class="user-container">
+  <div class="user-container" *ngIf="isLogged">
     <div class="login">
-      <a href="">
+      <a>
         <img class="user-icon" src="assets/img/login.png" />
         <span>User login</span>
       </a>
@@ -14,7 +14,12 @@
 
     <div class="logout">
       <img class="logout-icon" src="assets/img/logout.png" />
-      <a href="">Log off</a>
+      <a
+        (click)="logout()"
+        routerLink="/login"
+        routerLinkActive="active">
+        Log off
+      </a>
     </div>
   </div>
 </header>

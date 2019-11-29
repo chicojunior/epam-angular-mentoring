@@ -1,0 +1,40 @@
+<div class="vc-login">
+  <mat-card class="vc-login__card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <span class="required">*required</span>
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            placeholder="Enter e-mail"
+            [(ngModel)]="userEmail"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <span class="required">*required</span>
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            placeholder="Enter password"
+            [(ngModel)]="userPassword"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row action-row">
+        <a href="" class="vc-login__link">Forgot password?</a>
+        <button
+          class="vc-login__button"
+          mat-button
+          (click)="login()">
+          Login
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
