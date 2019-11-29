@@ -18,6 +18,5 @@ jobs:
 stages:
   - name: install
   - name: test
-    if: type = pull_request
   - name: deploy
     if: branch = master
