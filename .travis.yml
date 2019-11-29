@@ -16,12 +16,12 @@ after_success:
     script:
       - npm version minor
       - git push origin master --tag
-    deploy:
-      skip_cleanup: true
-      provider: firebase
-      token:
-        secure: $APP_TOKEN
   if: NOT branch = master AND push
     script:
       - npm update patch
       - git push --tag
+deploy:
+  skip_cleanup: true
+  provider: firebase
+  token:
+    secure: $APP_TOKEN
