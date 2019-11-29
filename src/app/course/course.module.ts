@@ -6,6 +6,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 import { CourseDurationPipeModule } from '../common/pipes/course-duration.pipe.module';
 import { OrderByModule } from '../common/pipes/order-by/order-by.module';
@@ -13,13 +15,15 @@ import { BorderHighlightModule } from '../common/directives/border-highlight/bor
 
 import { CoursePageComponent } from './course-page/course-page.component';
 import { CourseItemComponent } from './course-item/course-item.component';
+import { CourseDeleteDialogComponent } from './course-delete-dialog/course-delete-dialog.component';
 
 
 
 @NgModule({
   declarations: [
     CoursePageComponent,
-    CourseItemComponent
+    CourseItemComponent,
+    CourseDeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -30,8 +34,11 @@ import { CourseItemComponent } from './course-item/course-item.component';
     MatInputModule,
     CourseDurationPipeModule,
     BorderHighlightModule,
-    OrderByModule
+    OrderByModule,
+    MatDialogModule,
+    MatButtonModule
   ],
-  exports: [CoursePageComponent]
+  exports: [CoursePageComponent],
+  entryComponents: [CourseDeleteDialogComponent]
 })
 export class CourseModule { }

@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<app-breadcrumb></app-breadcrumb>
+<app-breadcrumb *ngIf="isLogged"></app-breadcrumb>
 
-<app-course-page></app-course-page>
+<router-outlet></router-outlet>
 
-<app-footer></app-footer>
+<app-footer class="vc-footer"></app-footer>

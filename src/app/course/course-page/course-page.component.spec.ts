@@ -1,22 +1,27 @@
+// @angular imports
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
-import { CoursePageComponent } from './course-page.component';
-import { CourseItemComponent } from '../course-item/course-item.component';
-
+// Directives
 import { BorderHighlightModule } from '../../common/directives/border-highlight/border-highlight.module';
 
+// Pipes
 import { CourseDurationPipeModule } from '../../common/pipes/course-duration.pipe.module';
 import { OrderByModule } from '../../common/pipes/order-by/order-by.module';
 
-import { ICourse } from 'src/app/common/course.interface';
-import { COURSE } from 'src/app/common/mock/course';
+import { ICourse } from '../../common/course.interface';
+import { COURSE } from '../../common/mock/course';
+
+// Components
+import { CoursePageComponent } from './course-page.component';
+import { CourseItemComponent } from '../course-item/course-item.component';
+
 
 
 describe('CoursePageComponent', () => {
@@ -37,7 +42,8 @@ describe('CoursePageComponent', () => {
         MatInputModule,
         BorderHighlightModule,
         CourseDurationPipeModule,
-        OrderByModule
+        OrderByModule,
+        MatDialogModule
       ]
     })
     .compileComponents();
