@@ -13,13 +13,11 @@ script:
   - ng build --prod
 after_success:
   if: branch = master
-    script:
-      - npm version minor
-      - git push origin master --tag
+    - npm version minor
+    - git push origin master --tag
   if: NOT branch = master AND push
-    script:
-      - npm update patch
-      - git push --tag
+    - npm update patch
+    - git push --tag
 deploy:
   skip_cleanup: true
   provider: firebase
