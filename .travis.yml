@@ -25,6 +25,3 @@ after_success:
     script:
       - npm update patch
       - git push --tag
-
-
-
