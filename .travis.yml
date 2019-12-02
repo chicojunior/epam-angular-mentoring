@@ -12,7 +12,8 @@ script:
   - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
   - ng build --prod
 after_success:
-  - firebase deploy --token $APP_TOKEN
+  script:
+    - firebase deploy --token $APP_TOKEN
   $TRAVIS_BRANCH = master
     - npm version minor
     - git push origin master
