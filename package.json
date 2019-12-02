@@ -1,6 +1,6 @@
 {
   "name": "fdovale-angular-mentoring",
-  "version": "0.5.12",
+  "version": "0.5.13",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
