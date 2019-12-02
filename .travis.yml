@@ -14,7 +14,7 @@ jobs:
     - stage: Update
       script:
         - if [ $TRAVIS_BRANCH = "master" ]; then npm version minor; git push -f https://$GH_USER:$GH_TOKEN@github.com/$GH_USER/epam-angular-mentoring HEAD:master; fi;
-        - if [ $TRAVIS_BRANCH != "master" ] & [ $TRAVIS_PULL_REQUEST = "true" ]; then npm version patch; fi;
+        - if [ $TRAVIS_BRANCH != "master" ] then npm version patch; fi;
         - git push -f https://$GH_USER:$GH_TOKEN@github.com/$GH_USER/epam-angular-mentoring HEAD:$TRAVIS_BRANCH;
     - stage: Publish
       script:
