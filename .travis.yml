@@ -15,7 +15,7 @@ jobs:
       script:
         - if [ $TRAVIS_BRANCH = "master" ]; then npm version patch; fi;
         - if [ $TRAVIS_BRANCH != "master" ] then npm version patch; fi;
-        - git push -f https://$GH_USER:$GH_TOKEN@github.com/$GH_USER/epam-angular-mentoring HEAD:$TRAVIS_BRANCH;
+        - git push -f https://$GH_USER:$GH_TOKEN@github.com/$GH_USER/epam-angular-mentoring HEAD:$TRAVIS_BRANCH
     - stage: Publish
       script:
         - npm install -g firebase-tools;
