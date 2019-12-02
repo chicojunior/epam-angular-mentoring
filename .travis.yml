@@ -13,8 +13,7 @@ jobs:
         - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
     - stage: Update
       script:
-        - if [ $TRAVIS_BRANCH = "master" ]; then npm version patch; fi;
-        - if [ $TRAVIS_BRANCH != "master" ] then npm version patch; fi;
+        - npm version patch
         - git push -f https://$GH_USER:$GH_TOKEN@github.com/$GH_USER/epam-angular-mentoring HEAD:$TRAVIS_BRANCH
     - stage: Publish
       script:
