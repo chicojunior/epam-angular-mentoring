@@ -12,8 +12,8 @@ jobs:
         - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
     - stage: Deploy
       script:
-        - if [ $TRAVIS_BRANCH = "master" ]; then npm version minor; git push origin master;
-        - if [ $TRAVIS_BRANCH != "master" ] & [ $TRAVIS_PULL_REQUEST = "true" ]; then npm version patch; git push;
+        - if [ $TRAVIS_BRANCH = "master" ]; then npm version minor; git push origin master; fi;
+        - if [ $TRAVIS_BRANCH != "master" ] & [ $TRAVIS_PULL_REQUEST = "true" ]; then npm version patch; git push; fi;
     - stage: Publish
       script:
         - if [ $TRAVIS_BRANCH = "master" ]; then firebase deploy --token $APP_TOKEN;
