@@ -13,7 +13,7 @@ jobs:
         - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
     - stage: Update
       script:
-        - branch=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p');
+        - branch=$(git rev-parse --abbrev-ref HEAD);
         - echo $branch;
         - if [ $TRAVIS_BRANCH = "master" ]; then npm version minor; fi;
         - if [ $TRAVIS_BRANCH != "master" ] & [ $TRAVIS_PULL_REQUEST = "true" ]; then npm version patch; fi;
