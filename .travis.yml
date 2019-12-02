@@ -13,7 +13,7 @@ script:
   - ng build --prod
 after_success:
   $TRAVIS_BRANCH = master
-    - npm version patch
+    - npm version minor
     - git push origin master
   $TRAVIS_BRANCH != master
     - npm version patch
