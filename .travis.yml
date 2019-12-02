@@ -12,14 +12,13 @@ script:
   - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
   - ng build --prod
 after_success:
-  $TRAVIS_BRANCH = "master"
+  $TRAVIS_BRANCH = master
     - npm version patch
-    - git push origin master --tag
-  $TRAVIS_BRANCH != "master"
+    - git push origin master
+  $TRAVIS_BRANCH != master
     - npm version patch
-    - git push --tag
+    - git push
 deploy:
-  cleanup: false
   provider: firebase
   token:
     secure: $APP_TOKEN
