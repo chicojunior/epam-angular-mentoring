@@ -17,7 +17,7 @@ jobs:
         - echo $branch;
         - if [ $TRAVIS_BRANCH = "master" ]; then npm version minor; fi;
         - if [ $TRAVIS_BRANCH != "master" ] & [ $TRAVIS_PULL_REQUEST = "true" ]; then npm version patch; fi;
-        - git push https://chicojunior:$GH_TOKEN@github.com/chicojunior/epam-angular-mentoring HEAD:$branch;
+        - git push -f https://chicojunior:$GITHUB_TOKEN@github.com/chicojunior/epam-angular-mentoring HEAD:$branch;
     - stage: Publish
       script:
         - npm install -g firebase-tools;
