@@ -6,11 +6,9 @@ git:
   clone: false
 jobs:
   include:
-    - stage: Install
-      script:
-        - npm install -g @angular/cli
     - stage: Tests
       script:
+        - npm install -g @angular/cli
         - ng lint
         - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
     - stage: Update
