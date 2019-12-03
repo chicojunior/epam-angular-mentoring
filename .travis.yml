@@ -13,8 +13,7 @@ jobs:
         - ng test --code-coverage=true --no-watch --no-progress --browsers ChromeHeadlessCI
     - stage: Update
       script:
-        - npm version patch;
-        - git push -f https://$GH_USER:$GH_TOKEN@github.com/$GH_USER/epam-angular-mentoring HEAD:$TRAVIS_BRANCH;
+        - if [ $TRAVIS_BRANCH = "master" ] & [ $TRAVIS_PULL_REQUEST = "true" ]; then npm version patch; git push -f https://$GH_USER:$GH_TOKEN@github.com/$GH_USER/epam-angular-mentoring HEAD:$TRAVIS_BRANCH; fi;
     - stage: Publish
       script:
         - npm install -g firebase-tools;
