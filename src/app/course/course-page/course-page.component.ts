@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
 import { CourseService } from '../course.service';
 
 import { ICourse } from '../../common/course.interface';
 import { COURSES } from '../../common/constants/course-page.constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-page',
@@ -15,10 +16,18 @@ export class CoursePageComponent implements OnInit {
   public courseInput: string;
   public noDataMessage = 'no data, feel free to add new course';
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private changeDetector: ChangeDetectorRef,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.courses = this.courseService.getCourseList();
+  }
+
+  addCourse(): void {
+    this.router.navigate(['add-course']);
   }
 
   searchCourse(searchText: string): void {

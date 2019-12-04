@@ -9,19 +9,21 @@ import { FooterModule } from './footer/footer.module';
 import { CourseModule } from './course/course.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { LoginModule } from './login/login.module';
+import { CourseAddModule } from './course-add/course-add.module';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [ AppComponent ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    HeaderModule,
-    FooterModule,
-    CourseModule,
     BreadcrumbModule,
     BrowserAnimationsModule,
+    BrowserModule,
+    CourseModule,
+    CourseAddModule,
+    FooterModule,
+    HeaderModule,
     LoginModule
   ],
   providers: [],

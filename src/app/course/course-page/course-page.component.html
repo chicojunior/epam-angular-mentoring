@@ -11,7 +11,7 @@
   </div>
 
   <div class="row course__add">
-    <button><i class="material-icons">add</i> Add course</button>
+    <button (click)="addCourse()"><i class="material-icons">add</i> Add course</button>
   </div>
 
   <div *ngIf="courses.length; else noCourses">
