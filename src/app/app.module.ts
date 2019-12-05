@@ -6,12 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
-import { CourseModule } from './course/course.module';
 import { BreadcrumbModule } from './breadcrumb/breadcrumb.module';
 import { LoginModule } from './login/login.module';
 import { CourseAddModule } from './course-add/course-add.module';
 
 import { AppComponent } from './app.component';
+import { CoursePageModule } from './course-page/course-page.module';
 
 @NgModule({
   declarations: [ AppComponent ],
@@ -20,7 +20,7 @@ import { AppComponent } from './app.component';
     BreadcrumbModule,
     BrowserAnimationsModule,
     BrowserModule,
-    CourseModule,
+    CoursePageModule,
     CourseAddModule,
     FooterModule,
     HeaderModule,

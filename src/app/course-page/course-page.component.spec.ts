@@ -9,14 +9,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 
 // Directives
-import { BorderHighlightModule } from '../../common/directives/border-highlight/border-highlight.module';
+import { BorderHighlightModule } from '../common/directives/border-highlight/border-highlight.module';
 
 // Pipes
-import { CourseDurationPipeModule } from '../../common/pipes/course-duration.pipe.module';
-import { OrderByModule } from '../../common/pipes/order-by/order-by.module';
+import { CourseDurationPipeModule } from '../common/pipes/course-duration.pipe.module';
+import { OrderByModule } from '../common/pipes/order-by/order-by.module';
 
-import { ICourse } from '../../common/course.interface';
-import { COURSE } from '../../common/mock/course';
+import { ICourse } from '../common/course.interface';
+import { COURSE } from '../common/mock/course';
 
 // Components
 import { CoursePageComponent } from './course-page.component';
@@ -62,7 +62,6 @@ describe('CoursePageComponent', () => {
   it('should call deleteCourse method', () => {
     const nativeElement: HTMLElement = fixture.nativeElement;
     const button: HTMLElement = nativeElement.querySelector('.delete-button');
-
     spyOn(component, 'deleteCourse');
     button.dispatchEvent(new Event('click'));
     fixture.detectChanges();
@@ -71,7 +70,6 @@ describe('CoursePageComponent', () => {
 
   it('should test if string is empty', () => {
     const testString = 'Not Empty String';
-
     expect(component.isNotEmptyString(testString)).toBeTruthy();
   });
 

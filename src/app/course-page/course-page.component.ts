@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 
-import { CourseService } from '../course.service';
+import { CourseService } from '../common/services/course.service';
 
-import { ICourse } from '../../common/course.interface';
-import { COURSES } from '../../common/constants/course-page.constants';
+import { ICourse } from '../common/course.interface';
+import { COURSES } from '../common/constants/course-page.constants';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,14 +11,13 @@ import { Router } from '@angular/router';
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss']
 })
+
 export class CoursePageComponent implements OnInit {
   public courses: ICourse[] = [];
   public courseInput: string;
-  public noDataMessage = 'no data, feel free to add new course';
 
   constructor(
     private courseService: CourseService,
-    private changeDetector: ChangeDetectorRef,
     private router: Router
   ) {}
 

@@ -1,1 +1,21 @@
-<p>course-list works!</p>
+<div class="vc-course-list">
+  <div *ngIf="courses.length; else noCourses">
+    <div class="row" *ngFor="let course of courses | orderBy: 'creationDate'">
+      <app-course-item [course]="course" (deleteCourse)="deleteCourse($event)"></app-course-item>
+    </div>
+
+    <div class="row">
+      <mat-card class="message-card">
+        <a href="#" (click)="loadMore($event)">LOAD_MORE</a>
+      </mat-card>
+    </div>
+  </div>
+
+  <ng-template #noCourses>
+    <div class="row">
+      <mat-card class="message-card">{{ noDataMessage | uppercase }}</mat-card>
+    </div>
+  </ng-template>
+</div>
+
+

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
-import { COURSES } from '../common/constants/course-page.constants';
-import { ICourse } from '../common/course.interface';
-import { CourseDeleteDialogComponent } from './course-delete-dialog/course-delete-dialog.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+
+import { COURSES } from '../constants/course-page.constants';
+import { ICourse } from '../course.interface';
+
+import { CourseDeleteDialogComponent } from '../dialog/course-delete-dialog/course-delete-dialog.component';
 
 @Injectable({
   providedIn: 'root'

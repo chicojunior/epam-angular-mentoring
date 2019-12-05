@@ -1,5 +1,5 @@
-@import '../../../mixins.scss';
-@import '../../../variables.scss';
+@import '../../mixins.scss';
+@import '../../variables.scss';
 
 :host {
   background-color: $app-bg-gray;
@@ -47,6 +47,12 @@
         margin-right: 8px;
       }
     }
+
+    &__list {
+      app-course-list {
+        width: 100%;
+      }
+    }
   }
 
   .search {
@@ -60,12 +66,7 @@
 
   }
 
-  .message-card {
 
-    margin-top: 20px;
-    width: 100%;
-    text-align: center;
-  }
 
   @include content-padding;
 }
