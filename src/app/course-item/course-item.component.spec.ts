@@ -8,6 +8,8 @@ import { COURSE } from 'src/app/common/mock/course';
 import { BorderHighlightModule } from '../common/directives/border-highlight/border-highlight.module';
 import { CourseDurationPipeModule } from '../common/pipes/course-duration.pipe.module';
 import { CourseItemModule } from './course-item.module';
+import { Router } from '@angular/router';
+import { CourseService } from '../common/services/course.service';
 
 
 @Component({
@@ -32,8 +34,11 @@ describe('CourseItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseItemComponent ],
-      imports: [ MatCardModule, BorderHighlightModule, CourseDurationPipeModule, CourseItemModule ]
+      imports: [ MatCardModule, BorderHighlightModule, CourseDurationPipeModule, CourseItemModule ],
+      providers: [
+        { provide: Router, useValue: {} },
+        { provide: CourseService, useValue: {} }
+      ]
     })
     .compileComponents();
   }));

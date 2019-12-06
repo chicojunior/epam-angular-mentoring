@@ -1,4 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { DurationInputComponent } from './duration-input.component';
 
@@ -8,7 +11,12 @@ describe('DurationInputComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DurationInputComponent ]
+      declarations: [ DurationInputComponent ],
+      imports: [
+        BrowserAnimationsModule,
+        MatFormFieldModule,
+        MatInputModule
+      ]
     })
     .compileComponents();
   }));

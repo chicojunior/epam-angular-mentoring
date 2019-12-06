@@ -18,9 +18,14 @@ import { OrderByModule } from '../common/pipes/order-by/order-by.module';
 import { ICourse } from '../common/course.interface';
 import { COURSE } from '../common/mock/course';
 
+import { CourseItemModule } from '../course-item/course-item.module';
+import { CourseListModule } from '../course-list/course-list.module';
+
 // Components
 import { CoursePageComponent } from './course-page.component';
-import { CourseItemComponent } from '../course-item/course-item.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
+import { CourseService } from '../common/services';
 
 
 
@@ -32,7 +37,7 @@ describe('CoursePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursePageComponent, CourseItemComponent ],
+      declarations: [ CoursePageComponent ],
       imports: [
         BrowserAnimationsModule,
         FormsModule,
@@ -43,7 +48,14 @@ describe('CoursePageComponent', () => {
         BorderHighlightModule,
         CourseDurationPipeModule,
         OrderByModule,
-        MatDialogModule
+        MatDialogModule,
+        CourseItemModule,
+        CourseListModule,
+        RouterTestingModule
+      ],
+      providers: [
+        { provide: Router, useValue: {} },
+        { provide: CourseService, useValue: { getCourseList: () => []} }
       ]
     })
     .compileComponents();
@@ -57,20 +69,6 @@ describe('CoursePageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should call deleteCourse method', () => {
-    const nativeElement: HTMLElement = fixture.nativeElement;
-    const button: HTMLElement = nativeElement.querySelector('.delete-button');
-    spyOn(component, 'deleteCourse');
-    button.dispatchEvent(new Event('click'));
-    fixture.detectChanges();
-    expect(component.deleteCourse).toHaveBeenCalledWith(course.id);
-  });
-
-  it('should test if string is empty', () => {
-    const testString = 'Not Empty String';
-    expect(component.isNotEmptyString(testString)).toBeTruthy();
   });
 
 });

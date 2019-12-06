@@ -16,14 +16,11 @@ export class CoursePageComponent implements OnInit {
   public courses: ICourse[] = [];
   public courseInput: string;
 
-  constructor(
-    private courseService: CourseService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
+  constructor(private courseService: CourseService, private router: Router) {
     this.courses = this.courseService.getCourseList();
   }
+
+  ngOnInit() {}
 
   addCourse(): void {
     this.router.navigate(['add-course']);
