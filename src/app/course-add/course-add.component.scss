@@ -6,6 +6,10 @@
   flex: 1;
   background-color: $app-bg-gray;
 
+  .row {
+    flex-direction: column;
+  }
+
   .vc-add-course {
     display: flex;
     width: 100%;
@@ -20,8 +24,37 @@
     }
   }
 
-  .full-size {
-    width: 100%;
+  .input-sm {
+    width: 25%;
+  }
+
+  .input-md {
+    width: 45%;
+  }
+
+  .save-btn {
+    color: #fff;
+  }
+
+  .cancel-btn {
+    background-color: $app-silver;
+  }
+
+  .required {
+    text-align: end;
+    font-size: 12px;
+    color: $app-battleship-grey;
+  }
+
+  .action-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    button {
+      margin-right: 12px;
+      display: flex;
+    }
   }
 }
 

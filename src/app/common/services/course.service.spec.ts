@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
 
-import { COURSES } from '../common/constants/course-page.constants';
+import { COURSES } from '../constants/course-page.constants';
 
 import { CourseService } from './course.service';
 
