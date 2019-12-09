@@ -21,7 +21,7 @@ export class AuthService {
     localStorage.setItem('user_data', JSON.stringify(MOCK_USER));
     console.log('Logged in successfully!');
     this.isLoggedSubject.next(true);
-    this.router.navigate(['/']);
+    this.router.navigate(['/courses']);
   }
 
   logout() {

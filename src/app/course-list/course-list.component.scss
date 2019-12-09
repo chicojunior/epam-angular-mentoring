@@ -1,0 +1,15 @@
+@import '../../mixins.scss';
+@import '../../variables.scss';
+
+.vc-course-list {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+
+  .message-card {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+  }
+}
+

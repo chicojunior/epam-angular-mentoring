@@ -1,11 +1,10 @@
-@import '../../../variables.scss';
+@import '../../variables.scss';
 
 :host {
   width: 100%;
   margin: 20px 0;
 
   .row {
-    margin: 0 16px;
     display: flex;
     align-items: center;
   }
@@ -107,6 +106,10 @@
     display: flex;
     flex: 1;
     width: fit-content;
+  }
+
+  mat-card-content {
+    padding: 10px;
   }
 
 }

@@ -1,24 +1,32 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { CourseService } from '../course.service';
-
-import { ICourse } from '../../common/course.interface';
-import { COURSES } from '../../common/constants/course-page.constants';
+import { COURSES } from '@app-common/constants/course-page.constants';
+import { ICourse } from '@app-common/course.interface';
+import { CourseService } from '@app-common/services/course.service';
 
 @Component({
   selector: 'app-course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss']
 })
+
 export class CoursePageComponent implements OnInit {
   public courses: ICourse[] = [];
   public courseInput: string;
-  public noDataMessage = 'no data, feel free to add new course';
 
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CourseService, private router: Router) {}
 
   ngOnInit() {
-    this.courses = this.courseService.getCourseList();
+    this.courseService
+      .setCourses(COURSES);
+    this.courseService
+      .getCourseList()
+      .subscribe(res => this.courses = res);
+  }
+
+  addCourse(): void {
+    this.router.navigate(['add-course']);
   }
 
   searchCourse(searchText: string): void {
@@ -32,11 +40,7 @@ export class CoursePageComponent implements OnInit {
   deleteCourse(courseId: string) {
     this.courseService
       .deleteCourse(this.courses, courseId)
-      .subscribe(res => {
-        if (res) {
-          this.courses = res;
-        }
-      });
+      .subscribe(res => this.courses = res);
   }
 
   loadMore(evt: MouseEvent) {

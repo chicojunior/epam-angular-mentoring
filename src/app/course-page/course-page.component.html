@@ -1,0 +1,21 @@
+<section>
+  <div class="row course__search">
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Course</mat-label>
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput placeholder="Text to search" [(ngModel)]="courseInput" />
+    </mat-form-field>
+    <button class="search__button" (click)="searchCourse(courseInput)">Search</button>
+  </div>
+
+  <div class="row course__add">
+    <button (click)="addCourse()">
+      <i class="material-icons">add</i> Add course
+    </button>
+  </div>
+
+  <div class="row course__list">
+    <app-course-list [courses]="courses"></app-course-list>
+  </div>
+
+</section>
