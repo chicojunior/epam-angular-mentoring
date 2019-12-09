@@ -1,16 +1,17 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+
 import { MatCardModule } from '@angular/material/card';
 
-import { CourseItemComponent } from './course-item.component';
-import { ICourse } from 'src/app/common/course.interface';
-import { COURSE } from 'src/app/common/mock/course';
-import { BorderHighlightModule } from '../common/directives/border-highlight/border-highlight.module';
-import { CourseDurationPipeModule } from '../common/pipes/course-duration.pipe.module';
-import { CourseItemModule } from './course-item.module';
-import { Router } from '@angular/router';
-import { CourseService } from '../common/services/course.service';
+import { ICourse } from '@app-common/course.interface';
+import { COURSE } from '@app-common/mock/course';
+import { BorderHighlightModule } from '@app-common/directives/border-highlight/border-highlight.module';
+import { CourseDurationPipeModule } from '@app-common/pipes/course-duration.pipe.module';
+import { CourseService } from '@app-common/services/course.service';
 
+import { CourseItemComponent } from './course-item.component';
+import { CourseItemModule } from './course-item.module';
 
 @Component({
   template: `<app-course-item [course]="course" (deleteCourse)="deleteCourse($event)"></app-course-item>`

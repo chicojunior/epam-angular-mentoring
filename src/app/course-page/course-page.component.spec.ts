@@ -1,37 +1,40 @@
-// @angular imports
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { of } from 'rxjs';
 
-// Directives
-import { BorderHighlightModule } from '../common/directives/border-highlight/border-highlight.module';
-
-// Pipes
-import { CourseDurationPipeModule } from '../common/pipes/course-duration.pipe.module';
-import { OrderByModule } from '../common/pipes/order-by/order-by.module';
-
-import { ICourse } from '../common/course.interface';
-import { COURSE } from '../common/mock/course';
+import { ICourse } from '@app-common/course.interface';
+import { COURSES } from '@app-common/constants/course-page.constants';
+import { BorderHighlightModule } from '@app-common/directives/border-highlight/border-highlight.module';
+import { CourseDurationPipeModule } from '@app-common/pipes/course-duration.pipe.module';
+import { OrderByModule } from '@app-common/pipes/order-by/order-by.module';
+import { CourseService } from '@app-common/services';
 
 import { CourseItemModule } from '../course-item/course-item.module';
 import { CourseListModule } from '../course-list/course-list.module';
-
-// Components
 import { CoursePageComponent } from './course-page.component';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Router } from '@angular/router';
-import { CourseService } from '../common/services';
 
+class MockCourseService {
+  res: ICourse[] = COURSES;
 
+  getCourseList() {
+    return of(this.res);
+  }
+
+  setCourses() {
+    this.res = COURSES;
+  }
+}
 
 describe('CoursePageComponent', () => {
-  const course: ICourse = COURSE;
-
   let component: CoursePageComponent;
   let fixture: ComponentFixture<CoursePageComponent>;
 
@@ -55,7 +58,7 @@ describe('CoursePageComponent', () => {
       ],
       providers: [
         { provide: Router, useValue: {} },
-        { provide: CourseService, useValue: { getCourseList: () => []} }
+        { provide: CourseService, useClass: MockCourseService }
       ]
     })
     .compileComponents();

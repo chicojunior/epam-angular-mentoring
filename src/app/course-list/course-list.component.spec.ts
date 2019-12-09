@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OrderByModule } from '../common/pipes/order-by/order-by.module';
-import { CourseItemModule } from '../course-item/course-item.module';
+
 import { MatCardModule } from '@angular/material/card';
-
-
-import { CourseListComponent } from './course-list.component';
 import { MatDialog } from '@angular/material/dialog';
-import { CourseService } from '../common/services';
-import { COURSES } from '../common/constants/course-page.constants';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { COURSES } from '@app-common/constants/course-page.constants';
+import { OrderByModule } from '@app-common/pipes/order-by/order-by.module';
+import { CourseService } from '@app-common/services';
+
+import { CourseItemModule } from '../course-item/course-item.module';
+import { CourseListComponent } from './course-list.component';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;

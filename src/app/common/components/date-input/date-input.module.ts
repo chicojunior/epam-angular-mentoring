@@ -7,16 +7,9 @@ import { MatInputModule } from '@angular/material/input';
 
 import { DateInputComponent } from './date-input.component';
 
-
-
 @NgModule({
   declarations: [DateInputComponent],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
+  imports: [CommonModule, MatIconModule, MatFormFieldModule, MatInputModule],
   exports: [DateInputComponent]
 })
-export class DateInputModule { }
+export class DateInputModule {}

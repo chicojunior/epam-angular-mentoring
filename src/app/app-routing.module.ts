@@ -21,10 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'courses',
-    component: CoursePageComponent,
-    children: [
-      { path: 'new', component: CourseAddComponent }
-    ]
+    component: CoursePageComponent
   }
 ];
 

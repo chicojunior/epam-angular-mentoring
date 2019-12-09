@@ -6,15 +6,9 @@ import { MatInputModule } from '@angular/material/input';
 
 import { AuthorsInputComponent } from './authors-input.component';
 
-
-
 @NgModule({
   declarations: [AuthorsInputComponent],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule
-  ],
+  imports: [CommonModule, MatFormFieldModule, MatInputModule],
   exports: [AuthorsInputComponent]
 })
-export class AuthorsInputModule { }
+export class AuthorsInputModule {}

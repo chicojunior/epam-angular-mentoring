@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ICourse } from '../common/course.interface';
-import { MESSAGES } from '../common/constants/course.constants';
+import { ICourse } from '@app-common/course.interface';
+import { MESSAGES } from '@app-common/constants/course.constants';
 
-import { CourseService } from '../common/services/course.service';
+import { CourseService } from '@app-common/services/course.service';
 
 @Component({
   selector: 'app-course-list',

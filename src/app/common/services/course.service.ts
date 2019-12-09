@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { COURSES } from '../constants/course-page.constants';
 import { ICourse } from '../course.interface';
@@ -12,6 +13,8 @@ import { CourseDeleteDialogComponent } from '../dialog/course-delete-dialog/cour
   providedIn: 'root'
 })
 export class CourseService {
+
+  protected courses: BehaviorSubject<ICourse[]> = new BehaviorSubject([]);
 
   constructor(private dialog: MatDialog) { }
 
@@ -37,8 +40,12 @@ export class CourseService {
     return dialogRef.afterClosed();
   }
 
-  getCourseList(): ICourse[] {
-    return COURSES;
+  getCourseList(): Observable<ICourse[]> {
+    return this.courses.asObservable();
+  }
+
+  setCourses(courses: ICourse[]): void {
+    this.courses.next(courses);
   }
 
   getCourseById(courseList: ICourse[], courseId: string): ICourse {

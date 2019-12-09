@@ -2,9 +2,6 @@
 @import '../../variables.scss';
 
 :host {
-  display: flex;
-  flex: 1;
-  background-color: $app-bg-gray;
 
   .row {
     flex-direction: column;

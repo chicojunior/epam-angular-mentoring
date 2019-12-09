@@ -8,9 +8,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
-import { AuthorsInputModule } from '../common/components/authors-input/authors-input.module';
-import { DateInputModule } from '../common/components/date-input/date-input.module';
-import { DurationInputModule } from '../common/components/duration-input/duration-input.module';
+import { AuthorsInputModule } from '@app-common/components/authors-input/authors-input.module';
+import { DateInputModule } from '@app-common/components/date-input/date-input.module';
+import { DurationInputModule } from '@app-common/components/duration-input/duration-input.module';
 
 import { CourseAddComponent } from './course-add.component';
 
