@@ -1,4 +1,21 @@
 :host {
   display: flex;
   flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 140px;
+    margin: 0;
+  }
+
+  h3 {
+    font-size: 50px;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 26px;
+  }
 }
