@@ -19,8 +19,6 @@ export class CoursePageComponent implements OnInit {
 
   ngOnInit() {
     this.courseService
-      .setCourses(COURSES);
-    this.courseService
       .getCourseList()
       .subscribe(res => this.courses = res);
   }
