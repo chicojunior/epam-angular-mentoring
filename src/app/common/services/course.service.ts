@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { COURSES } from '../constants/course-page.constants';
-import { ICourse } from '../course.interface';
+import { Course } from '../course.interface';
 
 import { CourseDeleteDialogComponent } from '../dialog/course-delete-dialog/course-delete-dialog.component';
 
@@ -13,32 +16,29 @@ import { CourseDeleteDialogComponent } from '../dialog/course-delete-dialog/cour
 })
 export class CourseService {
 
-  public courses: ICourse[];
-  protected coursesSubject: BehaviorSubject<ICourse[]> = new BehaviorSubject([]);
+  protected coursesSubject: BehaviorSubject<Course[]> = new BehaviorSubject([]);
+  protected BASE_URL = environment.BASE_URL;
 
-  constructor(private dialog: MatDialog) {
-    this.setCourses(COURSES);
-    this.getCourseList().subscribe(res => this.courses = res);
+  public courses: Observable<Course[]> = this.coursesSubject.asObservable();
+
+  constructor(private http: HttpClient, private dialog: MatDialog) {
+    this.getCourseList().subscribe(courses => this.setCourses(courses));
   }
 
-  addCourse(course: ICourse): void {}
+  addCourse(course: Course): void {}
 
-  updateCourse(courseList: ICourse[], updatedCourse: ICourse): ICourse[] {
+  updateCourse(courseList: Course[], updatedCourse: Course): Course[] {
     return courseList.reduce((agg, cur) => [
       agg,
       cur.id === updatedCourse.id ? updatedCourse : cur
     ], []);
   }
 
-  deleteCourse(courseList: ICourse[], courseId: string): Observable<ICourse[]> {
+  deleteCourse(courseList: Course[], courseId: string): Observable<Course[]> {
     return this.deleteCourseDialog(courseList, courseId);
   }
 
-  editCourse(courseId: string): void {
-
-  }
-
-  deleteCourseDialog(courseList: ICourse[], courseId: string): Observable<ICourse[]> {
+  deleteCourseDialog(courseList: Course[], courseId: string): Observable<Course[]> {
     const dialogRef = this.dialog
       .open(CourseDeleteDialogComponent, {
         data: this.filterCourseList(courseList, courseId)
@@ -47,24 +47,28 @@ export class CourseService {
     return dialogRef.afterClosed();
   }
 
-  getCourseList(): Observable<ICourse[]> {
-    return this.coursesSubject.asObservable();
+  getCourseList(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.BASE_URL}/courses`);
   }
 
-  setCourses(courses: ICourse[]): void {
+  setCourses(courses: Course[]): void {
     this.coursesSubject.next(courses);
   }
 
-  getCourseById(courseId: string): ICourse {
-    return this.courses.find(course => course.id === courseId);
+  getCourseById(courseId: string): Observable<Course> {
+    return this.getCourseList().pipe(
+      map(courses => courses.find(course => course.id === courseId))
+    );
+
+    // return this.courses.pipe(map(courses => courses.find(course => course.id === courseId)));
   }
 
-  includesText(list: ICourse[], text: string): ICourse[] {
+  includesText(list: Course[], text: string): Course[] {
     const textToSearch = text.toLowerCase();
     return list.filter(item => item.title.includes(textToSearch));
   }
 
-  private filterCourseList(list: ICourse[], id: string): ICourse[] {
+  private filterCourseList(list: Course[], id: string): Course[] {
     return list.filter(item => item.id !== id);
   }
 

@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import { ICourse } from '@app-common/course.interface';
+import { Course } from '@app-common/course.interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class CourseItemComponent implements OnInit {
 
-  @Input() course: ICourse;
+  @Input() course: Course;
   @Output() deleteCourse: EventEmitter<string> = new EventEmitter();
   @Output() editCourse: EventEmitter<string> = new EventEmitter();
 
@@ -26,11 +26,11 @@ export class CourseItemComponent implements OnInit {
 
   ngOnInit() {}
 
-  deleteItem(course: ICourse): void {
+  deleteItem(course: Course): void {
     this.deleteCourse.emit(course.id);
   }
 
-  editItem(course: ICourse): void {
+  editItem(course: Course): void {
     this.router.navigate(['courses', course.id]);
   }
 

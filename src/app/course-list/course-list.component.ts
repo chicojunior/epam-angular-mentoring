@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { ICourse } from '@app-common/course.interface';
+import { Course } from '@app-common/course.interface';
 import { MESSAGES } from '@app-common/constants/course.constants';
 
 import { CourseService } from '@app-common/services/course.service';
@@ -12,7 +12,7 @@ import { CourseService } from '@app-common/services/course.service';
 })
 export class CourseListComponent implements OnInit {
 
-  @Input() courses: ICourse[];
+  @Input() courses: Course[];
 
   public noDataMessage = MESSAGES.NO_DATA_MESSAGE;
 
