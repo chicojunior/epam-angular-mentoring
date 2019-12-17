@@ -10,6 +10,7 @@ import { CourseService } from '@app-common/services';
 
 import { CourseItemModule } from '../course-item/course-item.module';
 import { CourseListComponent } from './course-list.component';
+import { Router } from '@angular/router';
 
 describe('CourseListComponent', () => {
   let component: CourseListComponent;
@@ -26,7 +27,8 @@ describe('CourseListComponent', () => {
       ],
       providers: [
         { provide: MatDialog, useValue: {} },
-        { provide: CourseService, useValue: {} }
+        { provide: CourseService, useValue: {} },
+        { provide: Router, useValue: {} }
       ]
     })
     .compileComponents();

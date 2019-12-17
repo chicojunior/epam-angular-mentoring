@@ -19,14 +19,12 @@ export class CoursePageComponent implements OnInit {
 
   ngOnInit() {
     this.courseService
-      .setCourses(COURSES);
-    this.courseService
       .getCourseList()
       .subscribe(res => this.courses = res);
   }
 
   addCourse(): void {
-    this.router.navigate(['add-course']);
+    this.router.navigate(['courses/new']);
   }
 
   searchCourse(searchText: string): void {

@@ -9,12 +9,15 @@ import { AuthService } from '@app-common/services';
 })
 export class HeaderComponent implements OnInit {
 
-  public isLogged: any;
+  public isLogged: boolean;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.authService.isLogged.subscribe(logged => this.isLogged = logged);
+    this.authService.isLogged
+      .subscribe(logged => {
+        this.isLogged = logged;
+      });
   }
 
   logout() {

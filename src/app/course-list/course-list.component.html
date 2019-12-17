@@ -1,7 +1,11 @@
 <div class="vc-course-list">
   <div *ngIf="courses.length; else noCourses">
     <div class="row" *ngFor="let course of courses | orderBy: 'creationDate'">
-      <app-course-item [course]="course" (deleteCourse)="deleteCourse($event)"></app-course-item>
+      <app-course-item
+        [course]="course"
+        (editCourse)="editCourse($event)"
+        (deleteCourse)="deleteCourse($event)">
+      </app-course-item>
     </div>
 
     <div class="row">

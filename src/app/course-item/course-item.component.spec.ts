@@ -38,7 +38,8 @@ describe('CourseItemComponent', () => {
       imports: [ MatCardModule, BorderHighlightModule, CourseDurationPipeModule, CourseItemModule ],
       providers: [
         { provide: Router, useValue: {} },
-        { provide: CourseService, useValue: {} }
+        { provide: CourseService, useValue: {} },
+        { provide: Router, useValue: {} }
       ]
     })
     .compileComponents();
@@ -83,7 +84,10 @@ describe('CourseItemTestComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ CourseItemTestComponent, CourseItemComponent ],
       imports: [ BorderHighlightModule, CourseDurationPipeModule ],
-      schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      providers: [
+        { provide: Router, useValue: {} }
+      ]
     }).compileComponents();
   }));
 

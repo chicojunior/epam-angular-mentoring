@@ -25,14 +25,11 @@
     <div class="row content">
       <p class="content__description">{{ course.description }}</p>
       <div class="content__actions">
-        <button class="action-button">
+        <button class="action-button" (click)="editItem(course)">
           <i class="material-icons">edit</i>
           <span>Edit</span>
         </button>
-        <button
-          class="action-button delete-button"
-          (click)="deleteItem(course)"
-        >
+        <button class="action-button delete-button" (click)="deleteItem(course)">
           <i class="material-icons">delete</i>
           <span>Delete</span>
         </button>
