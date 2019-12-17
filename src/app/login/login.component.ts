@@ -14,14 +14,15 @@ export class LoginComponent implements OnInit {
   public userPassword: string;
   public isLogged: boolean;
 
-  constructor(private authService: AuthService) { }
-
-  ngOnInit() {
+  constructor(private authService: AuthService) {
     this.authService.isLogged
       .subscribe(logged => {
         this.isLogged = logged;
       });
-    if (this.authService.isAuthenticated()) {
+   }
+
+  ngOnInit() {
+    if (this.isLogged) {
       this.authService.goToCourses();
     }
   }

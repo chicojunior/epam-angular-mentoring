@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CourseService } from '@app-common/services';
+
 import { ICourse } from '@app-common/course.interface';
+import { CourseService } from '@app-common/services';
+
 
 @Component({
   selector: 'app-course-add',
@@ -9,7 +11,7 @@ import { ICourse } from '@app-common/course.interface';
   styleUrls: ['./course-add.component.scss']
 })
 export class CourseAddComponent implements OnInit {
-  public id: string;
+  public pageTitle = '';
   public course: ICourse = {
     id: '',
     title: '',
@@ -25,13 +27,13 @@ export class CourseAddComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.id = this.route.snapshot.paramMap.get('id');
-    if (this.id) {
-      this.getCourseById();
-    }
-  }
-
-  getCourseById() {
-    this.course = this.courseService.getCourseById(this.id);
+    this.route.params.subscribe(params => {
+      if (params.id) {
+        this.pageTitle = 'Edit Course';
+        this.course = this.courseService.getCourseById(params.id);
+      } else {
+        this.pageTitle = 'New Course';
+      }
+    });
   }
 }
