@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
 
-import { COURSES } from '../constants/course-page.constants';
+import { COURSES } from '@app-common/mock/courses';
 
 import { CourseService } from './course.service';
 
@@ -10,6 +11,7 @@ describe('CourseService', () => {
   let service: CourseService;
 
   beforeEach(() => TestBed.configureTestingModule({
+    imports: [ HttpClientModule ],
     providers: [
       { provide: MatDialog, useValue: {} }
     ]

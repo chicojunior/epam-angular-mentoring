@@ -7,7 +7,7 @@ export class UtilsService {
 
   constructor() { }
 
-  generateRandomUID(): string {
+  public generateRandomUID(): string {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
       .replace(/[xy]/g, (c) => {
         // tslint:disable-next-line: no-bitwise

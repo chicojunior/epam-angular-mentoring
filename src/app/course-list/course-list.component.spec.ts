@@ -4,7 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatDialog } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { COURSES } from '@app-common/constants/course-page.constants';
+import { COURSES } from '@app-common/mock/courses';
 import { OrderByModule } from '@app-common/pipes/order-by/order-by.module';
 import { CourseService } from '@app-common/services';
 

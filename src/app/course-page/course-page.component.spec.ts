@@ -12,7 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { of } from 'rxjs';
 
 import { Course } from '@app-common/course.interface';
-import { COURSES } from '@app-common/constants/course-page.constants';
+import { COURSES } from '@app-common/mock/courses';
 import { BorderHighlightModule } from '@app-common/directives/border-highlight/border-highlight.module';
 import { CourseDurationPipeModule } from '@app-common/pipes/course-duration.pipe.module';
 import { OrderByModule } from '@app-common/pipes/order-by/order-by.module';

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { COURSES } from '@app-common/constants/course-page.constants';
+import { map } from 'rxjs/operators';
+
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
 
@@ -18,25 +19,27 @@ export class CoursePageComponent implements OnInit {
   constructor(private courseService: CourseService, private router: Router) {}
 
   ngOnInit() {
-    this.courseService.courses.subscribe(courses => this.courses = courses);
+    this.getList();
+  }
+
+  getList() {
+    this.courseService
+      .getCourseList()
+      .subscribe(res => this.courses = res);
   }
 
   addCourse(): void {
     this.router.navigate(['courses/new']);
   }
 
-  searchCourse(searchText: string): void {
-    // this.courses = this.isNotEmptyString(searchText) ? this.courseService.includesText(COURSES, searchText) : COURSES;
-  }
-
-  updateCourse(course: Course) {
-    this.courses = this.courseService.updateCourse(this.courses, course);
-  }
-
   deleteCourse(courseId: string) {
     this.courseService
-      .deleteCourse(this.courses, courseId)
-      .subscribe(res => this.courses = res);
+      .deleteCourse(courseId)
+      .subscribe(res => this.getList());
+  }
+
+  searchCourse(searchText: string): void {
+    // this.courses = this.isNotEmptyString(searchText) ? this.courseService.includesText(COURSES, searchText) : COURSES;
   }
 
   loadMore(evt: MouseEvent) {
