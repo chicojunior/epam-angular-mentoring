@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
 import { Observable, BehaviorSubject } from 'rxjs';
@@ -37,6 +37,11 @@ export class CourseService {
           error => console.log('Error', error)
         )
       );
+  }
+
+  filterCourses(filterString: string): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.BASE_URL}/courses`, { params: { title_like: filterString } })
+    .pipe(map(data => data, error => console.log(error)));
   }
 
   updateCourse(updatedCourse: Course): Observable<Course[]> {

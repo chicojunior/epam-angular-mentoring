@@ -1,5 +1,5 @@
 <div class="vc-course-list">
-  <div *ngIf="courses.length; else noCourses">
+  <div class="course-list" *ngIf="courses.length; else noCourses">
     <div class="row" *ngFor="let course of courses | orderBy: 'creationDate'">
       <app-course-item
         [course]="course"

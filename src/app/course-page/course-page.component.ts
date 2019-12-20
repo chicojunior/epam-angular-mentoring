@@ -38,8 +38,11 @@ export class CoursePageComponent implements OnInit {
       .subscribe(res => this.getList());
   }
 
-  searchCourse(searchText: string): void {
-    // this.courses = this.isNotEmptyString(searchText) ? this.courseService.includesText(COURSES, searchText) : COURSES;
+  searchCourse(): void {
+    console.log(this.courseInput);
+    this.courseService
+      .filterCourses(this.courseInput)
+      .subscribe(res => this.courses = res);
   }
 
   loadMore(evt: MouseEvent) {
