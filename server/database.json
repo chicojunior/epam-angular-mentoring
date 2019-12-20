@@ -39,6 +39,30 @@
       "duration": 93,
       "description": "Omnis quae enim possimus. Perferendis velit quo. Dignissimos in et quidem neque beatae eligendi aliquam. Doloribus ducimus voluptas in nihil eius eaque sed.",
       "topRated": false
+    },
+    {
+      "id": "ff5b9daf-d83e-4c09-aaac-a2833f64cf1b",
+      "title": "Test title",
+      "creationDate": "2019-12-20T12:29:40.304Z",
+      "duration": 85,
+      "description": "dsadd",
+      "topRated": false
+    },
+    {
+      "id": "9e852dac-89ff-4720-b3fc-1354e0474791",
+      "title": "Test course",
+      "creationDate": "2019-12-28T00:00:00.000Z",
+      "duration": 88,
+      "description": "7848",
+      "topRated": false
+    },
+    {
+      "id": "78b26e39-cf96-4f0f-b70b-a414b5cde91e",
+      "title": "testq",
+      "creationDate": "2019-12-13T00:00:00.000Z",
+      "duration": 85,
+      "description": "test",
+      "topRated": false
     }
   ]
 }

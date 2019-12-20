@@ -35,12 +35,12 @@
 
       <div class="row input-sm">
         <span class="required">*required</span>
-        <app-duration-input></app-duration-input>
+        <app-duration-input (courseDurationOutput)="setCourseDuration($event)"></app-duration-input>
       </div>
 
       <div class="row input-sm">
         <span class="required">*required</span>
-        <app-date-input></app-date-input>
+        <app-date-input (courseDateOutput)="setCourseDate($event)"></app-date-input>
       </div>
 
       <div class="row input-md">
@@ -56,7 +56,8 @@
         <button
           class="save-btn"
           color="primary"
-          mat-flat-button>
+          mat-flat-button
+          (click)="saveCourse()">
           Save
         </button>
       </div>

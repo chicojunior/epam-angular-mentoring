@@ -1,4 +1,10 @@
 <mat-form-field appearance="outline" color="primary">
   <mat-label>Date</mat-label>
-  <input matInput placeholder="mm-dd-yyyy"/>
+  <input
+    matInput
+    type="date"
+    placeholder="mm-dd-yyyy"
+    (blur)="setCourseDate()"
+    [(ngModel)]="courseDate"
+  />
 </mat-form-field>
