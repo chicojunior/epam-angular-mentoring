@@ -12,13 +12,23 @@ export class LoginComponent implements OnInit {
 
   public userEmail: string;
   public userPassword: string;
+  public isLogged: boolean;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+    this.authService.isLogged
+      .subscribe(logged => {
+        this.isLogged = logged;
+      });
+   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.isLogged) {
+      this.authService.goToCourses();
+    }
+  }
 
   login() {
-    this.authService.login();
+    this.authService.login(this.userEmail, this.userPassword);
   }
 
 }

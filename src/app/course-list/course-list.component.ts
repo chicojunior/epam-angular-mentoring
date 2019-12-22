@@ -23,11 +23,13 @@ export class CourseListComponent implements OnInit {
   deleteCourse(courseId: string) {
     this.courseService
       .deleteCourse(this.courses, courseId)
-      .subscribe(res => {
-        if (res) {
-          this.courses = res;
-        }
-      });
+      .subscribe(res => this.courses = res);
+  }
+
+  editCourse(courseId: string) {
+    this.courseService
+      .deleteCourse(this.courses, courseId)
+      .subscribe(res => this.courses = res);
   }
 
   loadMore(evt: MouseEvent) {

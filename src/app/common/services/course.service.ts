@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Observable, BehaviorSubject } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 import { COURSES } from '../constants/course-page.constants';
 import { ICourse } from '../course.interface';
@@ -14,9 +13,13 @@ import { CourseDeleteDialogComponent } from '../dialog/course-delete-dialog/cour
 })
 export class CourseService {
 
-  protected courses: BehaviorSubject<ICourse[]> = new BehaviorSubject([]);
+  public courses: ICourse[];
+  protected coursesSubject: BehaviorSubject<ICourse[]> = new BehaviorSubject([]);
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {
+    this.setCourses(COURSES);
+    this.getCourseList().subscribe(res => this.courses = res);
+  }
 
   addCourse(course: ICourse): void {}
 
@@ -31,6 +34,10 @@ export class CourseService {
     return this.deleteCourseDialog(courseList, courseId);
   }
 
+  editCourse(courseId: string): void {
+
+  }
+
   deleteCourseDialog(courseList: ICourse[], courseId: string): Observable<ICourse[]> {
     const dialogRef = this.dialog
       .open(CourseDeleteDialogComponent, {
@@ -41,15 +48,15 @@ export class CourseService {
   }
 
   getCourseList(): Observable<ICourse[]> {
-    return this.courses.asObservable();
+    return this.coursesSubject.asObservable();
   }
 
   setCourses(courses: ICourse[]): void {
-    this.courses.next(courses);
+    this.coursesSubject.next(courses);
   }
 
-  getCourseById(courseList: ICourse[], courseId: string): ICourse {
-    return courseList.find(course => course.id === courseId);
+  getCourseById(courseId: string): ICourse {
+    return this.courses.find(course => course.id === courseId);
   }
 
   includesText(list: ICourse[], text: string): ICourse[] {

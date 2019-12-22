@@ -13,6 +13,7 @@ import { CourseDeleteDialogModule } from '@app-common/dialog/course-delete-dialo
 import { CourseItemModule } from '../course-item/course-item.module';
 import { CourseListModule } from '../course-list/course-list.module';
 import { CoursePageComponent } from './course-page.component';
+import { CoursesRoutingModule } from './courses-routing.module';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { CoursePageComponent } from './course-page.component';
     MatButtonModule,
     CourseDeleteDialogModule,
     CourseItemModule,
-    CourseListModule
+    CourseListModule,
+    CoursesRoutingModule
   ],
   exports: [CoursePageComponent]
 })

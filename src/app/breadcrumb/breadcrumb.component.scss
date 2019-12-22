@@ -3,7 +3,6 @@
 
 :host {
   display: flex;
-  height: 50px;
   background-color: $app-white;
 
   section {
@@ -20,6 +19,20 @@
     }
   }
 
+
   @include content-padding;
+}
+
+:host ::ng-deep {
+
+  .mat-bread-crumb {
+    background-color: $app-white!important;
+
+    a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
 }
 
