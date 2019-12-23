@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 import { DateInputComponent } from './date-input.component';
 
@@ -17,7 +18,8 @@ describe('DateInputComponent', () => {
         BrowserAnimationsModule,
         MatIconModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        FormsModule
       ]
     })
     .compileComponents();
