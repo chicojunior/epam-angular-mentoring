@@ -15,6 +15,7 @@ export class AuthService {
   private isUserChecked: boolean;
   private isLoggedSubject = new BehaviorSubject<boolean>(false);
   public isLogged = this.isLoggedSubject.asObservable();
+  public isAuthenticated: boolean;
 
   constructor(private router: Router) {
     this.isUserChecked = false;
@@ -22,6 +23,7 @@ export class AuthService {
 
   login(email?: string, password?: string) {
     if (this.checkCredentials(email, password, MOCK_USER)) {
+      this.cleanData();
       localStorage.setItem('user_data', JSON.stringify(MOCK_USER));
       this.isLoggedSubject.next(true);
       this.goToCourses();
@@ -32,8 +34,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('user_data');
-    this.isLoggedSubject.next(false);
+    this.cleanData();
     this.router.navigate(['/login']);
   }
 
@@ -49,12 +50,17 @@ export class AuthService {
     return this.isUserChecked;
   }
 
-  isAuthenticated(): Observable<boolean> {
+  isUserAuthenticated(): Observable<boolean> {
     return this.isLogged;
   }
 
   getUserInfo(): IUser {
     return JSON.parse(localStorage.getItem('user_data'));
+  }
+
+  cleanData(): void {
+    localStorage.removeItem('user_data');
+    this.isLoggedSubject.next(false);
   }
 
 

@@ -27,21 +27,27 @@ export class CourseService {
   ) {}
 
   addCourse(course: Course): Observable<any> {
-    return this.http
-      .post(`${this.BASE_URL}/courses`, course)
-      .pipe(
-        map(
-          data => {
-            console.log('POST call successful value returned in body', data);
-          },
-          error => console.log('Error', error)
-        )
-      );
+    return this.http.post(`${this.BASE_URL}/courses`, course).pipe(
+      map(
+        data => {
+          console.log('POST call successful value returned in body', data);
+        },
+        error => console.log('Error', error)
+      )
+    );
   }
 
   filterCourses(filterString: string): Observable<Course[]> {
-    return this.http.get<Course[]>(`${this.BASE_URL}/courses`, { params: { title_like: filterString } })
-    .pipe(map(data => data, error => console.log(error)));
+    return this.http
+      .get<Course[]>(`${this.BASE_URL}/courses`, {
+        params: { title_like: filterString }
+      })
+      .pipe(
+        map(
+          data => data,
+          error => console.log(error)
+        )
+      );
   }
 
   updateCourse(updatedCourse: Course): Observable<Course[]> {
@@ -56,11 +62,12 @@ export class CourseService {
   }
 
   deleteCall(courseId: string): Observable<any> {
-    return this.http
-      .delete(`${this.BASE_URL}/courses/${courseId}`)
-      .pipe(
-        map(res => 'DELETE call sucessfully made!', error => console.log(error))
-      );
+    return this.http.delete(`${this.BASE_URL}/courses/${courseId}`).pipe(
+      map(
+        res => 'DELETE call sucessfully made!',
+        error => console.log(error)
+      )
+    );
   }
 
   getCourseList(): Observable<Course[]> {
@@ -85,9 +92,5 @@ export class CourseService {
   includesText(list: Course[], text: string): Course[] {
     const textToSearch = text.toLowerCase();
     return list.filter(item => item.title.includes(textToSearch));
-  }
-
-  private filterCourseList(list: Course[], id: string): Course[] {
-    return list.filter(item => item.id !== id);
   }
 }
