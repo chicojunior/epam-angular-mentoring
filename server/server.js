@@ -55,7 +55,6 @@ const loginRouter = express.Router();
 loginRouter.post('/', (req, res, next) => {
   try {
     const body = req.body;
-    console.log(body);
     const user = getUser({
       email: body.email
     });
@@ -66,12 +65,9 @@ loginRouter.post('/', (req, res, next) => {
         response: 'Invalid email or password',
       });
     } else {
-      res.json({
-        status: true,
-        response: jwt.sign(user, config.tokenKey, {
-          expiresIn: 60 * 60
-        })
-      });
+      res.json(jwt.sign(user, config.tokenKey, {
+        expiresIn: 60 * 60
+      }));
     }
   } catch (error) {
     res.status(500).send({
@@ -84,20 +80,14 @@ loginRouter.post('/', (req, res, next) => {
 const usersRoute = express.Router();
 usersRoute.use(authGuard);
 usersRoute.get('/', (req, res, next) => {
-  res.json({
-    status: true,
-    response: data.users
-  });
+  res.json(data.users);
 });
 usersRoute.get('/:id', (req, res, next) => {
   const id = req.params.id;
   const user = getUser({ id });
 
   if (user) {
-    res.json({
-      status: true,
-      response: user,
-    });
+    res.json(user);
   } else {
     res.status(404).send({
       status: false,
