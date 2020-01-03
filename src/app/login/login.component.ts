@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { NgxSpinnerService } from 'ngx-spinner';
+
 import { AuthService } from '@app-common/services';
 
 
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
   public userPassword: string;
   public isLogged: boolean;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private loader: NgxSpinnerService) {
     this.authService.isLogged
       .subscribe(logged => {
         this.isLogged = logged;
@@ -28,7 +30,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService.login(this.userEmail, this.userPassword);
+    this.loader.show();
+    this.authService
+      .login(this.userEmail, this.userPassword)
+      .subscribe(load => load ? this.loader.show : this.loader.hide());
   }
 
 }

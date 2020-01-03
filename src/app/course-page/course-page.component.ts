@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { map } from 'rxjs/operators';
@@ -12,7 +12,8 @@ import { CourseService } from '@app-common/services/course.service';
   styleUrls: ['./course-page.component.scss']
 })
 
-export class CoursePageComponent implements OnInit {
+export class CoursePageComponent implements OnInit, OnChanges {
+
   public courses: Course[] = [];
   public courseInput: string;
 
@@ -20,6 +21,12 @@ export class CoursePageComponent implements OnInit {
 
   ngOnInit() {
     this.getList();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.courseInput.length >= 3 || this.courseInput === '') {
+      this.searchCourse(this.courseInput);
+    }
   }
 
   getList() {
@@ -38,10 +45,9 @@ export class CoursePageComponent implements OnInit {
       .subscribe(res => this.getList());
   }
 
-  searchCourse(): void {
-    console.log(this.courseInput);
+  searchCourse(filter: string): void {
     this.courseService
-      .filterCourses(this.courseInput)
+      .filterCourses(filter)
       .subscribe(res => this.courses = res);
   }
 

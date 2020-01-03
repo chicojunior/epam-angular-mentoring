@@ -22,7 +22,6 @@ export class ApiInterceptor implements HttpInterceptor {
     const cloneReq = req.clone({
       params: req.params.set('access_token', this.user.access_token)
     });
-    console.log(cloneReq);
     return next.handle(cloneReq);
   }
 

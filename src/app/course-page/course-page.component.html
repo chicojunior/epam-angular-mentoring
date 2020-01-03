@@ -7,7 +7,7 @@
         matInput
         placeholder="Text to search"
         [(ngModel)]="courseInput"
-        (input)="searchCourse()"
+        (keyup)="ngOnChanges($event)"
       />
     </mat-form-field>
   </div>

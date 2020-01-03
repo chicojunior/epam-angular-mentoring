@@ -28,6 +28,7 @@
     "material-design-icons": "^3.0.1",
     "moment": "^2.24.0",
     "ng7-mat-breadcrumb": "^2.0.0",
+    "ngx-spinner": "^8.1.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

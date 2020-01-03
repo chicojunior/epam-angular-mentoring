@@ -21,16 +21,21 @@ export class AuthService {
     this.isUserChecked = false;
   }
 
-  login(email?: string, password?: string) {
+  login(email?: string, password?: string): Observable<boolean> {
+    let load: any;
     if (this.checkCredentials(email, password, MOCK_USER)) {
       this.cleanData();
       localStorage.setItem('user_data', JSON.stringify(MOCK_USER));
       this.isLoggedSubject.next(true);
       this.goToCourses();
       console.log('Logged in successfully!');
+      load = true;
     } else {
       console.log('Wrong credentials!');
+      load = false;
     }
+
+    return load;
   }
 
   logout() {
