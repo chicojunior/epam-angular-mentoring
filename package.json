@@ -6,6 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --aot=true",
+    "start-proxy": "ng s --aot --proxyConfig ./proxy.config.js",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
@@ -34,7 +35,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.9",
+    "@angular-devkit/build-angular": "^0.803.21",
     "@angular/cli": "~8.3.9",
     "@angular/compiler-cli": "~8.2.9",
     "@angular/language-service": "~8.2.9",
