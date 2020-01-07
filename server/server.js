@@ -20,9 +20,15 @@ const getUser = (params) => {
   );
 };
 
-const authGuard = (req, res, next) => {
+const authTokenExtractor = (req, res, next) => {
   const authorization = req.header('Authorization');
   const token = authorization ? authorization.split(' ')[1] : null;
+  req.authToken = token;
+  next();
+}
+
+const authGuard = (req, res, next) => {
+  token = req.authToken;
   if (!token) {
     res.status(400).send({
       status: false,
@@ -82,6 +88,10 @@ usersRoute.use(authGuard);
 usersRoute.get('/', (req, res, next) => {
   res.json(data.users);
 });
+usersRoute.get('/currentUser', (req, res, next) => {
+  const token = req.authToken;
+  res.json(jwt.decode(token));
+});
 usersRoute.get('/:id', (req, res, next) => {
   const id = req.params.id;
   const user = getUser({ id });
@@ -104,6 +114,7 @@ const middlewares = jsonServer.defaults();
 const server = jsonServer.create();
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
+server.use(authTokenExtractor);
 server.use('/login', loginRouter);
 server.use('/users', usersRoute);
 server.use(coursesRouter);
