@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
     this.loader.show();
     this.authService
       .login(this.userEmail, this.userPassword)
-      .subscribe(load => load ? this.loader.show : this.loader.hide());
   }
 
 }

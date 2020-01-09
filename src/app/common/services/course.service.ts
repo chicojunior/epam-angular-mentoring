@@ -54,17 +54,15 @@ export class CourseService {
     return this.getCourseList().pipe();
   }
 
-  deleteCourse(courseId: string): Observable<boolean> {
-    const dialogRef = this.dialog.open(CourseDeleteDialogComponent, {
-      data: courseId
-    });
+  deleteCourseConfirmation(): Observable<boolean> {
+    const dialogRef = this.dialog.open(CourseDeleteDialogComponent);
     return dialogRef.afterClosed();
   }
 
-  deleteCall(courseId: string): Observable<any> {
+  deleteCourse(courseId: string): Observable<any> {
     return this.http.delete(`${this.BASE_URL}/courses/${courseId}`).pipe(
       map(
-        res => 'DELETE call sucessfully made!',
+        res => true,
         error => console.log(error)
       )
     );

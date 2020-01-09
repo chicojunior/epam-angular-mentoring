@@ -1,19 +1,18 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { map } from 'rxjs/operators';
+import { map, switchMap, filter, mergeMap, flatMap } from 'rxjs/operators';
 
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss']
 })
-
 export class CoursePageComponent implements OnInit, OnChanges {
-
   public courses: Course[] = [];
   public courseInput: string;
 
@@ -30,9 +29,7 @@ export class CoursePageComponent implements OnInit, OnChanges {
   }
 
   getList() {
-    this.courseService
-      .getCourseList()
-      .subscribe(res => this.courses = res);
+    this.courseService.getCourseList().subscribe(res => (this.courses = res));
   }
 
   addCourse(): void {
@@ -41,14 +38,18 @@ export class CoursePageComponent implements OnInit, OnChanges {
 
   deleteCourse(courseId: string) {
     this.courseService
-      .deleteCourse(courseId)
-      .subscribe(res => this.getList());
+      .deleteCourseConfirmation()
+      .pipe(
+        filter(canDelete => canDelete),
+        switchMap(() => this.courseService.deleteCourse(courseId))
+      )
+      .subscribe(() => this.getList());
   }
 
-  searchCourse(filter: string): void {
+  searchCourse(query: string): void {
     this.courseService
-      .filterCourses(filter)
-      .subscribe(res => this.courses = res);
+      .filterCourses(query)
+      .subscribe(res => (this.courses = res));
   }
 
   loadMore(evt: MouseEvent) {
@@ -59,5 +60,4 @@ export class CoursePageComponent implements OnInit, OnChanges {
   isNotEmptyString(str: string): boolean {
     return str.trim().length !== 0;
   }
-
 }

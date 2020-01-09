@@ -15,18 +15,8 @@ export class CourseDeleteDialogComponent {
     @Inject(MAT_DIALOG_DATA) public courseId: string
   ) {}
 
-  public close(): void {
-    this.dialogRef.close();
-  }
-
-  public deleteCourse(): void {
-    this.courseService
-      .deleteCall(this.courseId)
-      .subscribe(res => {
-        console.log(res);
-        const deleteCourse = true;
-        this.dialogRef.close(deleteCourse);
-      });
+  public close(option: boolean): void {
+    this.dialogRef.close(option);
   }
 
 }
