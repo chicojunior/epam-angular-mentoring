@@ -4,11 +4,10 @@ import { Router } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 
-import { ICourse } from '@app-common/course.interface';
-import { COURSE } from '@app-common/mock/course';
 import { BorderHighlightModule } from '@app-common/directives/border-highlight/border-highlight.module';
 import { CourseDurationPipeModule } from '@app-common/pipes/course-duration.pipe.module';
 import { CourseService } from '@app-common/services/course.service';
+import { Course } from '@app-common/course.interface';
 
 import { CourseItemComponent } from './course-item.component';
 import { CourseItemModule } from './course-item.module';
@@ -18,7 +17,7 @@ import { CourseItemModule } from './course-item.module';
 })
 
 class CourseItemTestComponent {
-  public course: ICourse = COURSE;
+  public course: Course = new Course();
   public courseId: number;
 
   deleteCourse(courseId: number) {
@@ -28,7 +27,7 @@ class CourseItemTestComponent {
 }
 
 describe('CourseItemComponent', () => {
-  const course: ICourse = COURSE;
+  const course: Course = new Course();
 
   let component: CourseItemComponent;
   let fixture: ComponentFixture<CourseItemComponent>;

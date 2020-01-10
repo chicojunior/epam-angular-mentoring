@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "id": "b0a65af4-85c0-41bc-b5ee-f489b6fd27d3",
+      "email": "francisco_do_vale@epam.com",
+      "password": "testpass",
+      "access_token": "8zxJcg0ZthkhhQoHJCsv2Wf4nycJqVXoP6L6TPpQcGIb6jaTQW4w1GgeyFDumcpK2SPHUjWhxRptvHEnWMgsAMDxmA0YjtTt3dvl3iFkjEYGq4mrPLeK0xXyXM91djh80Todg5vHn7lJRnqZIw0TTYkYKoSKc1rfyRQRWoDDJlUQBk0XEpagOMYGEsTuLEwgauQQTXfIoMVbGXhY3f9VCRgUNJ8l7jRx6Rhrl7w6WTM1CpNQiuhSIuDxMVFeSUtMrigapOGDtatwd8wjW5MuALmVX3UNNdzhTpSNyxY3Ky488REsRF2EwIVijtzZkXXdIxvQSxrMg5AXosNlQiTNdqvUfHoQ1dHNRgb02Ts2bMWvEUOrkbXjgxVa4XJxsiAqxnOtag8xLfHI1ogLcvBjhNBnzHLuIeqLZvIfMd3EXi9F8XEZRMZLdDq0aZ04159H8hplgTN4efEyDtwBnaFnUPNyHaq33qTlKLHUShWZ81KJA9xGbV6bAAbZXAm1X5vFmfhW9lgQfYWGOEYs1gzZ8Df7lYy4EQFKHBWaGcLDiiTQzJGiVkj4CJmBCc80bfwuhxhY90pOnTUecyXawE6viEgUmb7cQEjdo9zA2rjZV25a4DFZEL6teGHPMUiLExdl",
+      "firstName": "Francisco",
+      "lastName": "do Vale"
+    }
+  ],
+  "courses": [
+    {
+      "id": "3c4f92a9-28ef-4d4b-8fda-f27d9635b2a2",
+      "title": "gbyoyim roxbeaym",
+      "creationDate": "4/26/2019",
+      "duration": 90,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet pellentesque nisi. Ut a sodales nisl. Morbi elementum orci at sem dapibus, sed rhoncus leo lobortis. Sed nunc dolor, lobortis eget dui et, bibendum gravida ante. Duis scelerisque placerat quam, vitae malesuada dui tincidunt non. Donec felis quam, congue ac nunc a, dapibus volutpat libero. Fusce scelerisque magna tortor, in lobortis dolor semper gravida. Integer eget lacinia erat. Nunc sed diam vitae augue aliquet laoreet vitae ut arcu. Quisque nec quam sodales, condimentum enim efficitur, fermentum enim. Aenean luctus auctor nisi ac tincidunt. Vivamus ut sodales metus. Sed convallis urna sit amet tellus venenatis pharetra.",
+      "topRated": false
+    },
+    {
+      "id": "bcc1d013-0614-4691-911b-2d3b9798dd96",
+      "title": "uojalxd jjeurszc",
+      "creationDate": "7/27/2019",
+      "duration": 51,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet pellentesque nisi. Ut a sodales nisl. Morbi elementum orci at sem dapibus, sed rhoncus leo lobortis. Sed nunc dolor, lobortis eget dui et, bibendum gravida ante. Duis scelerisque placerat quam, vitae malesuada dui tincidunt non. Donec felis quam, congue ac nunc a, dapibus volutpat libero. Fusce scelerisque magna tortor, in lobortis dolor semper gravida. Integer eget lacinia erat. Nunc sed diam vitae augue aliquet laoreet vitae ut arcu. Quisque nec quam sodales, condimentum enim efficitur, fermentum enim. Aenean luctus auctor nisi ac tincidunt. Vivamus ut sodales metus. Sed convallis urna sit amet tellus venenatis pharetra.",
+      "topRated": false
+    },
+    {
+      "id": "9b91f19c-80ef-47b7-95ea-8d854929524e",
+      "title": "njinvls ftcobyhr",
+      "creationDate": "9/15/2019",
+      "duration": 38,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet pellentesque nisi. Ut a sodales nisl. Morbi elementum orci at sem dapibus, sed rhoncus leo lobortis. Sed nunc dolor, lobortis eget dui et, bibendum gravida ante. Duis scelerisque placerat quam, vitae malesuada dui tincidunt non. Donec felis quam, congue ac nunc a, dapibus volutpat libero. Fusce scelerisque magna tortor, in lobortis dolor semper gravida. Integer eget lacinia erat. Nunc sed diam vitae augue aliquet laoreet vitae ut arcu. Quisque nec quam sodales, condimentum enim efficitur, fermentum enim. Aenean luctus auctor nisi ac tincidunt. Vivamus ut sodales metus. Sed convallis urna sit amet tellus venenatis pharetra.",
+      "topRated": true
+    },
+    {
+      "id": "168aeab1-ddfd-41f7-b598-4653b2685566",
+      "title": "jfpmyhh wubrmiuv",
+      "creationDate": "6/5/2019",
+      "duration": 42,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet pellentesque nisi. Ut a sodales nisl. Morbi elementum orci at sem dapibus, sed rhoncus leo lobortis. Sed nunc dolor, lobortis eget dui et, bibendum gravida ante. Duis scelerisque placerat quam, vitae malesuada dui tincidunt non. Donec felis quam, congue ac nunc a, dapibus volutpat libero. Fusce scelerisque magna tortor, in lobortis dolor semper gravida. Integer eget lacinia erat. Nunc sed diam vitae augue aliquet laoreet vitae ut arcu. Quisque nec quam sodales, condimentum enim efficitur, fermentum enim. Aenean luctus auctor nisi ac tincidunt. Vivamus ut sodales metus. Sed convallis urna sit amet tellus venenatis pharetra.",
+      "topRated": false
+    },
+    {
+      "id": "51589435-b489-4909-b505-0f22409ca457",
+      "title": "coijkxr mgkdrhjo",
+      "creationDate": "12/23/2019",
+      "duration": 79,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet pellentesque nisi. Ut a sodales nisl. Morbi elementum orci at sem dapibus, sed rhoncus leo lobortis. Sed nunc dolor, lobortis eget dui et, bibendum gravida ante. Duis scelerisque placerat quam, vitae malesuada dui tincidunt non. Donec felis quam, congue ac nunc a, dapibus volutpat libero. Fusce scelerisque magna tortor, in lobortis dolor semper gravida. Integer eget lacinia erat. Nunc sed diam vitae augue aliquet laoreet vitae ut arcu. Quisque nec quam sodales, condimentum enim efficitur, fermentum enim. Aenean luctus auctor nisi ac tincidunt. Vivamus ut sodales metus. Sed convallis urna sit amet tellus venenatis pharetra.",
+      "topRated": false
+    },
+    {
+      "id": "3416dbd8-b695-404c-9dd6-be3e16ed0a58",
+      "title": "xxcmrjf kfihfplx",
+      "creationDate": "5/7/2019",
+      "duration": 57,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet pellentesque nisi. Ut a sodales nisl. Morbi elementum orci at sem dapibus, sed rhoncus leo lobortis. Sed nunc dolor, lobortis eget dui et, bibendum gravida ante. Duis scelerisque placerat quam, vitae malesuada dui tincidunt non. Donec felis quam, congue ac nunc a, dapibus volutpat libero. Fusce scelerisque magna tortor, in lobortis dolor semper gravida. Integer eget lacinia erat. Nunc sed diam vitae augue aliquet laoreet vitae ut arcu. Quisque nec quam sodales, condimentum enim efficitur, fermentum enim. Aenean luctus auctor nisi ac tincidunt. Vivamus ut sodales metus. Sed convallis urna sit amet tellus venenatis pharetra.",
+      "topRated": true
+    },
+    {
+      "id": "c34912e7-8689-4f1b-83de-f866c63e97e7",
+      "title": "ygydmrk nudzirsn",
+      "creationDate": "11/17/2019",
+      "duration": 15,
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet pellentesque nisi. Ut a sodales nisl. Morbi elementum orci at sem dapibus, sed rhoncus leo lobortis. Sed nunc dolor, lobortis eget dui et, bibendum gravida ante. Duis scelerisque placerat quam, vitae malesuada dui tincidunt non. Donec felis quam, congue ac nunc a, dapibus volutpat libero. Fusce scelerisque magna tortor, in lobortis dolor semper gravida. Integer eget lacinia erat. Nunc sed diam vitae augue aliquet laoreet vitae ut arcu. Quisque nec quam sodales, condimentum enim efficitur, fermentum enim. Aenean luctus auctor nisi ac tincidunt. Vivamus ut sodales metus. Sed convallis urna sit amet tellus venenatis pharetra.",
+      "topRated": true
+    }
+  ]
+}

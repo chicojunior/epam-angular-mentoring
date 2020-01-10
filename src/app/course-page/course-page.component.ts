@@ -1,44 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { COURSES } from '@app-common/constants/course-page.constants';
-import { ICourse } from '@app-common/course.interface';
+import { map, switchMap, filter, mergeMap, flatMap } from 'rxjs/operators';
+
+import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss']
 })
-
-export class CoursePageComponent implements OnInit {
-  public courses: ICourse[] = [];
+export class CoursePageComponent implements OnInit, OnChanges {
+  public courses: Course[] = [];
   public courseInput: string;
 
   constructor(private courseService: CourseService, private router: Router) {}
 
   ngOnInit() {
-    this.courseService
-      .getCourseList()
-      .subscribe(res => this.courses = res);
+    this.getList();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.courseInput.length >= 3 || this.courseInput === '') {
+      this.searchCourse(this.courseInput);
+    }
+  }
+
+  getList() {
+    this.courseService.getCourseList().subscribe(res => (this.courses = res));
   }
 
   addCourse(): void {
     this.router.navigate(['courses/new']);
   }
 
-  searchCourse(searchText: string): void {
-    this.courses = this.isNotEmptyString(searchText) ? this.courseService.includesText(COURSES, searchText) : COURSES;
-  }
-
-  updateCourse(course: ICourse) {
-    this.courses = this.courseService.updateCourse(this.courses, course);
-  }
-
   deleteCourse(courseId: string) {
     this.courseService
-      .deleteCourse(this.courses, courseId)
-      .subscribe(res => this.courses = res);
+      .deleteCourseConfirmation()
+      .pipe(
+        filter(canDelete => canDelete),
+        switchMap(() => this.courseService.deleteCourse(courseId))
+      )
+      .subscribe(() => this.getList());
+  }
+
+  searchCourse(query: string): void {
+    this.courseService
+      .filterCourses(query)
+      .subscribe(res => (this.courses = res));
   }
 
   loadMore(evt: MouseEvent) {
@@ -49,5 +60,4 @@ export class CoursePageComponent implements OnInit {
   isNotEmptyString(str: string): boolean {
     return str.trim().length !== 0;
   }
-
 }

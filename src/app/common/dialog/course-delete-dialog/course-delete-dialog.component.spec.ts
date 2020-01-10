@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HttpClient } from '@angular/common/http';
 
 import { CourseDeleteDialogComponent } from './course-delete-dialog.component';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 describe('CourseDeleteDialogComponent', () => {
   let component: CourseDeleteDialogComponent;
@@ -13,7 +14,8 @@ describe('CourseDeleteDialogComponent', () => {
       providers: [
         { provide: MatDialog, useValue: {} },
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: MatDialogRef, useValue: {} }
+        { provide: MatDialogRef, useValue: {} },
+        { provide: HttpClient, useValue: {} }
       ]
     })
     .compileComponents();

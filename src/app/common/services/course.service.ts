@@ -1,71 +1,94 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { COURSES } from '../constants/course-page.constants';
-import { ICourse } from '../course.interface';
+import { Course } from '../course.interface';
 
 import { CourseDeleteDialogComponent } from '../dialog/course-delete-dialog/course-delete-dialog.component';
+import { UtilsService } from './utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CourseService {
+  protected coursesSubject: BehaviorSubject<Course[]> = new BehaviorSubject([]);
+  protected BASE_URL = environment.BASE_URL;
 
-  public courses: ICourse[];
-  protected coursesSubject: BehaviorSubject<ICourse[]> = new BehaviorSubject([]);
+  public courses: Observable<Course[]> = this.coursesSubject.asObservable();
 
-  constructor(private dialog: MatDialog) {
-    this.setCourses(COURSES);
-    this.getCourseList().subscribe(res => this.courses = res);
+  constructor(
+    private http: HttpClient,
+    private dialog: MatDialog,
+    private utils: UtilsService
+  ) {}
+
+  addCourse(course: Course): Observable<any> {
+    return this.http.post(`${this.BASE_URL}/courses`, course).pipe(
+      map(
+        data => {
+          console.log('POST call successful value returned in body', data);
+        },
+        error => console.log('Error', error)
+      )
+    );
   }
 
-  addCourse(course: ICourse): void {}
-
-  updateCourse(courseList: ICourse[], updatedCourse: ICourse): ICourse[] {
-    return courseList.reduce((agg, cur) => [
-      agg,
-      cur.id === updatedCourse.id ? updatedCourse : cur
-    ], []);
+  filterCourses(filterString: string): Observable<Course[]> {
+    return this.http
+      .get<Course[]>(`${this.BASE_URL}/courses`, {
+        params: { title_like: filterString }
+      })
+      .pipe(
+        map(
+          data => data,
+          error => console.log(error)
+        )
+      );
   }
 
-  deleteCourse(courseList: ICourse[], courseId: string): Observable<ICourse[]> {
-    return this.deleteCourseDialog(courseList, courseId);
+  updateCourse(updatedCourse: Course): Observable<Course[]> {
+    return this.getCourseList().pipe();
   }
 
-  editCourse(courseId: string): void {
-
-  }
-
-  deleteCourseDialog(courseList: ICourse[], courseId: string): Observable<ICourse[]> {
-    const dialogRef = this.dialog
-      .open(CourseDeleteDialogComponent, {
-        data: this.filterCourseList(courseList, courseId)
-      });
-
+  deleteCourseConfirmation(): Observable<boolean> {
+    const dialogRef = this.dialog.open(CourseDeleteDialogComponent);
     return dialogRef.afterClosed();
   }
 
-  getCourseList(): Observable<ICourse[]> {
-    return this.coursesSubject.asObservable();
+  deleteCourse(courseId: string): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}/courses/${courseId}`).pipe(
+      map(
+        res => true,
+        error => console.log(error)
+      )
+    );
   }
 
-  setCourses(courses: ICourse[]): void {
+  getCourseList(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.BASE_URL}/courses`).pipe(
+      map(
+        data => data,
+        error => console.log(error)
+      )
+    );
+  }
+
+  setCourses(courses: Course[]): void {
     this.coursesSubject.next(courses);
   }
 
-  getCourseById(courseId: string): ICourse {
-    return this.courses.find(course => course.id === courseId);
+  getCourseById(courseId: string): Observable<Course> {
+    return this.getCourseList().pipe(
+      map(courses => courses.find(course => course.id === courseId))
+    );
   }
 
-  includesText(list: ICourse[], text: string): ICourse[] {
+  includesText(list: Course[], text: string): Course[] {
     const textToSearch = text.toLowerCase();
     return list.filter(item => item.title.includes(textToSearch));
   }
-
-  private filterCourseList(list: ICourse[], id: string): ICourse[] {
-    return list.filter(item => item.id !== id);
-  }
-
 }

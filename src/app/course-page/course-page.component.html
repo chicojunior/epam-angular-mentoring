@@ -3,9 +3,13 @@
     <mat-form-field appearance="outline" color="primary">
       <mat-label>Course</mat-label>
       <mat-icon matPrefix>search</mat-icon>
-      <input matInput placeholder="Text to search" [(ngModel)]="courseInput" />
+      <input
+        matInput
+        placeholder="Text to search"
+        [(ngModel)]="courseInput"
+        (keyup)="ngOnChanges($event)"
+      />
     </mat-form-field>
-    <button class="search__button" (click)="searchCourse(courseInput)">Search</button>
   </div>
 
   <div class="row course__add">
@@ -15,7 +19,7 @@
   </div>
 
   <div class="row course__list">
-    <app-course-list [courses]="courses"></app-course-list>
+    <app-course-list [courses]="courses" (courseDelete)="deleteCourse($event)">
+    </app-course-list>
   </div>
-
 </section>

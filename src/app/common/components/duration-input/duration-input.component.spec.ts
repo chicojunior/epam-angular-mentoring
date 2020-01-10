@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 import { DurationInputComponent } from './duration-input.component';
 
@@ -15,7 +16,8 @@ describe('DurationInputComponent', () => {
       imports: [
         BrowserAnimationsModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        FormsModule
       ]
     })
     .compileComponents();

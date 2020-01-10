@@ -1,4 +1,10 @@
 <mat-form-field appearance="outline" color="primary">
   <mat-label>Duration</mat-label>
-  <input matInput placeholder="Minutes"/>
+  <input
+    matInput
+    type="number"
+    placeholder="Minutes"
+    (blur)="setCourseDuration()"
+    [(ngModel)]="courseDuration"
+  />
 </mat-form-field>

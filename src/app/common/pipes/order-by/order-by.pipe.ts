@@ -1,13 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { ICourse } from '../../course.interface';
+import { Course } from '../../course.interface';
 
 @Pipe({
   name: 'orderBy'
 })
 export class OrderByPipe implements PipeTransform {
 
-  transform(courseList: ICourse[], param: keyof ICourse): ICourse[] {
+  transform(courseList: Course[], param: keyof Course): Course[] {
     return courseList.sort((a, b) => a[param] < b[param] ? -1 : a[param] > b[param] ? 1 : 0);
   }
 

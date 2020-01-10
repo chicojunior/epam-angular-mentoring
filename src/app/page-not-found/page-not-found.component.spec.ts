@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { LocationStrategy } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 
 import { PageNotFoundComponent } from './page-not-found.component';
-import { LocationStrategy } from '@angular/common';
 
 xdescribe('PageNotFoundComponent', () => {
   let component: PageNotFoundComponent;
