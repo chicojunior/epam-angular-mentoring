@@ -20,20 +20,28 @@ import { LoaderModule } from './loader/loader.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+const BASE_MODULES = [
+  AppRoutingModule,
+  BrowserAnimationsModule,
+  BrowserModule,
+];
+
+const FEATURE_MODULES = [
+  HeaderModule,
+  FooterModule,
+  BreadcrumbModule,
+  LoginModule,
+  CoursePageModule,
+  CourseAddModule,
+  LoaderModule,
+];
+
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
   imports: [
-    AppRoutingModule,
-    BreadcrumbModule,
-    BrowserAnimationsModule,
-    BrowserModule,
-    HeaderModule,
-    FooterModule,
-    LoginModule,
-    CoursePageModule,
-    CourseAddModule,
-    LoaderModule,
-    NgxSpinnerModule
+    ...BASE_MODULES,
+    ...FEATURE_MODULES,
+    NgxSpinnerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }

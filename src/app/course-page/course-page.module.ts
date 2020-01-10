@@ -13,25 +13,36 @@ import { CourseDeleteDialogModule } from '@app-common/dialog/course-delete-dialo
 
 import { CourseItemModule } from '../course-item/course-item.module';
 import { CourseListModule } from '../course-list/course-list.module';
+
 import { CoursePageComponent } from './course-page.component';
-import { CoursesRoutingModule } from './courses-routing.module';
+
+const BASE_MODULES = [
+  CommonModule,
+  FormsModule,
+  HttpClientModule
+];
+
+const MATERIAL_MODULES = [
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule
+];
+
+const FEATURE_MODULES = [
+  CourseDeleteDialogModule,
+  CourseItemModule,
+  CourseListModule
+];
 
 
 @NgModule({
   declarations: [CoursePageComponent],
   imports: [
-    CommonModule,
-    FormsModule,
-    MatCardModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    CourseDeleteDialogModule,
-    CourseItemModule,
-    CourseListModule,
-    CoursesRoutingModule,
-    HttpClientModule
+    BASE_MODULES,
+    MATERIAL_MODULES,
+    FEATURE_MODULES
   ],
   exports: [CoursePageComponent]
 })
