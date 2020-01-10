@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.loader.show();
     this.authService
-      .login(this.userEmail, this.userPassword)
+      .login(this.userEmail, this.userPassword);
   }
 
 }
