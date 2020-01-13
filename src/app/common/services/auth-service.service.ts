@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 import { IUser } from '../user.interface';
 import { MOCK_USER } from '../mock/user';
+import { UtilsService } from './utils.service';
 
 
 @Injectable({
@@ -17,25 +18,22 @@ export class AuthService {
   public isLogged = this.isLoggedSubject.asObservable();
   public isAuthenticated: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private utilsService: UtilsService) {
     this.isUserChecked = false;
   }
 
-  login(email?: string, password?: string): Observable<boolean> {
-    let load: any;
+  login(email?: string, password?: string): void {
     if (this.checkCredentials(email, password, MOCK_USER)) {
+      this.utilsService.showLoader(true);
       this.cleanData();
       localStorage.setItem('user_data', JSON.stringify(MOCK_USER));
       this.isLoggedSubject.next(true);
       this.goToCourses();
       console.log('Logged in successfully!');
-      load = true;
     } else {
+      this.utilsService.showLoader(false);
       console.log('Wrong credentials!');
-      load = false;
     }
-
-    return load;
   }
 
   logout() {

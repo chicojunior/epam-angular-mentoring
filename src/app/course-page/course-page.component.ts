@@ -6,6 +6,7 @@ import { map, switchMap, filter, mergeMap, flatMap } from 'rxjs/operators';
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
 import { EMPTY } from 'rxjs';
+import { UtilsService } from '@app-common/services';
 
 @Component({
   selector: 'app-course-page',
@@ -16,7 +17,7 @@ export class CoursePageComponent implements OnInit, OnChanges {
   public courses: Course[] = [];
   public courseInput: string;
 
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(private courseService: CourseService, private router: Router, private utilsService: UtilsService) {}
 
   ngOnInit() {
     this.getList();
@@ -29,7 +30,10 @@ export class CoursePageComponent implements OnInit, OnChanges {
   }
 
   getList() {
-    this.courseService.getCourseList().subscribe(res => (this.courses = res));
+    this.courseService.getCourseList().subscribe(res => {
+      this.courses = res;
+      this.utilsService.showLoader(false);
+    });
   }
 
   addCourse(): void {
