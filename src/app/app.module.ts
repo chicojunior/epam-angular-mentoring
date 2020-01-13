@@ -19,6 +19,10 @@ import { LoaderModule } from './loader/loader.module';
 
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 const BASE_MODULES = [
   AppRoutingModule,
@@ -42,6 +46,14 @@ const FEATURE_MODULES = [
     ...BASE_MODULES,
     ...FEATURE_MODULES,
     NgxSpinnerModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
+    }),
+    EffectsModule.forRoot([AppEffects]),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }
