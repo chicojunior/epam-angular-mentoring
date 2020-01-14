@@ -1,11 +1,14 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { map, switchMap, filter, mergeMap, flatMap } from 'rxjs/operators';
+import {
+  switchMap,
+  filter,
+  debounceTime
+} from 'rxjs/operators';
 
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
-import { EMPTY } from 'rxjs';
 import { UtilsService } from '@app-common/services';
 
 @Component({
@@ -17,7 +20,11 @@ export class CoursePageComponent implements OnInit, OnChanges {
   public courses: Course[] = [];
   public courseInput: string;
 
-  constructor(private courseService: CourseService, private router: Router, private utilsService: UtilsService) {}
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit() {
     this.getList();
@@ -30,6 +37,7 @@ export class CoursePageComponent implements OnInit, OnChanges {
   }
 
   getList() {
+    this.utilsService.showLoader(true);
     this.courseService.getCourseList().subscribe(res => {
       this.courses = res;
       this.utilsService.showLoader(false);
@@ -51,9 +59,14 @@ export class CoursePageComponent implements OnInit, OnChanges {
   }
 
   searchCourse(query: string): void {
+    this.utilsService.showLoader(true);
     this.courseService
       .filterCourses(query)
-      .subscribe(res => (this.courses = res));
+      .pipe(debounceTime(600))
+      .subscribe(res => {
+        this.courses = res;
+        this.utilsService.showLoader(false);
+      });
   }
 
   loadMore(evt: MouseEvent) {
