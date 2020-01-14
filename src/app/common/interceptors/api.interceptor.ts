@@ -20,7 +20,7 @@ export class ApiInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const cloneReq = req.clone({
-      params: req.params.set('access_token', this.user.access_token)
+      headers: req.headers.set('Authorization', this.user.access_token)
     });
     return next.handle(cloneReq);
   }
