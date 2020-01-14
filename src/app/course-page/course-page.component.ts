@@ -1,11 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {
-  switchMap,
-  filter,
-  debounceTime
-} from 'rxjs/operators';
+import { switchMap, filter, debounceTime } from 'rxjs/operators';
 
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
@@ -16,9 +12,8 @@ import { UtilsService } from '@app-common/services';
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss']
 })
-export class CoursePageComponent implements OnInit, OnChanges {
+export class CoursePageComponent implements OnInit {
   public courses: Course[] = [];
-  public courseInput: string;
 
   constructor(
     private courseService: CourseService,
@@ -28,12 +23,7 @@ export class CoursePageComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.getList();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.courseInput.length >= 3 || this.courseInput === '') {
-      this.searchCourse(this.courseInput);
-    }
+    this.courseSearchSubscription();
   }
 
   getList() {
@@ -42,6 +32,15 @@ export class CoursePageComponent implements OnInit, OnChanges {
       this.courses = res;
       this.utilsService.showLoader(false);
     });
+  }
+
+  courseSearchSubscription() {
+    this.courseService.searchInput
+      .pipe(
+        filter(input => input.length >= 3 || input === ''),
+        debounceTime(600)
+      )
+      .subscribe(query => this.searchCourse(query));
   }
 
   addCourse(): void {
@@ -58,15 +57,16 @@ export class CoursePageComponent implements OnInit, OnChanges {
       .subscribe(() => this.getList());
   }
 
+  search(query: string) {
+    this.courseService.searchCourses(query);
+  }
+
   searchCourse(query: string): void {
     this.utilsService.showLoader(true);
-    this.courseService
-      .filterCourses(query)
-      .pipe(debounceTime(600))
-      .subscribe(res => {
-        this.courses = res;
-        this.utilsService.showLoader(false);
-      });
+    this.courseService.filterCourses(query).subscribe(res => {
+      this.courses = res;
+      this.utilsService.showLoader(false);
+    });
   }
 
   loadMore(evt: MouseEvent) {
