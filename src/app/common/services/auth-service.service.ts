@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { IUser } from '../user.interface';
-import { MOCK_USER } from '../mock/user';
 import { UtilsService } from './utils.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -72,12 +71,15 @@ export class AuthService {
     return this.isUserChecked;
   }
 
-  isUserAuthenticated(): Observable<boolean> {
-    return this.isLogged;
-  }
-
-  getUserInfo(): IUser {
-    return JSON.parse(localStorage.getItem('user_data'));
+  getUserInfo(): Observable<any> {
+    return this.http
+      .get(`${environment.BASE_URL}/currentUser`)
+      .pipe(
+        map(
+          user => console.log('User', user),
+          error => console.log('Error', error)
+        )
+      );
   }
 
   cleanData(): void {

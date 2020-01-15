@@ -17,8 +17,7 @@ export class CoursePageComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private router: Router,
-    private utilsService: UtilsService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -27,10 +26,10 @@ export class CoursePageComponent implements OnInit {
   }
 
   getList() {
-    this.utilsService.showLoader(true);
+    // this.utilsService.showLoader(true);
     this.courseService.getCourseList().subscribe(res => {
       this.courses = res;
-      this.utilsService.showLoader(false);
+      // this.utilsService.showLoader(false);
     });
   }
 
@@ -62,10 +61,10 @@ export class CoursePageComponent implements OnInit {
   }
 
   searchCourse(query: string): void {
-    this.utilsService.showLoader(true);
+    // this.utilsService.showLoader(true);
     this.courseService.filterCourses(query).subscribe(res => {
       this.courses = res;
-      this.utilsService.showLoader(false);
+      // this.utilsService.showLoader(false);
     });
   }
 
