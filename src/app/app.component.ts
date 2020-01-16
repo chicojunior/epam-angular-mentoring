@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.isLogged.subscribe(res => this.isLogged = res);
-    this.utilsService.loader.subscribe(showLoader => this.isLoading = showLoader);
+    // this.utilsService.loader.subscribe(showLoader => this.isLoading = showLoader);
   }
 
 }

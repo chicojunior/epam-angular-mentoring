@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AuthService, UtilsService } from '@app-common/services';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -27,16 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.utils.showLoader(true);
     this.authService
       .login(this.userEmail, this.userPassword)
-      .subscribe(
-        res => this.cancelLoader(),
-        err => this.cancelLoader()
-      );
-  }
-
-  private cancelLoader() {
-    this.utils.showLoader(false);
+      .pipe(switchMap(() => this.authService.getUserInfo()))
+      .subscribe();
   }
 }

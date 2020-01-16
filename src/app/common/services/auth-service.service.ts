@@ -17,10 +17,12 @@ export class AuthService {
   private isUserChecked: boolean;
   private isLoggedSubject = new BehaviorSubject<boolean>(false);
   private tokenSubject: BehaviorSubject<string> = new BehaviorSubject('');
+  private userSubject: BehaviorSubject<any> = new BehaviorSubject({});
 
   public isLogged = this.isLoggedSubject.asObservable();
   public isAuthenticated: boolean;
   public token: Observable<string> = this.tokenSubject.asObservable();
+  public user: Observable<any> = this.userSubject.asObservable();
 
   constructor(
     private router: Router,
@@ -73,10 +75,10 @@ export class AuthService {
 
   getUserInfo(): Observable<any> {
     return this.http
-      .get(`${environment.BASE_URL}/currentUser`)
+      .get(`${environment.BASE_URL}/users`)
       .pipe(
         map(
-          user => console.log('User', user),
+          userList => this.userSubject.next(userList[0]),
           error => console.log('Error', error)
         )
       );

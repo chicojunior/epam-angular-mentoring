@@ -6,13 +6,13 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { AuthService } from '@app-common/services';
+import { AuthService, UtilsService } from '@app-common/services';
 import { IUser } from '@app-common/user.interface';
 
 export class ApiInterceptor implements HttpInterceptor {
   token: string;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private utils: UtilsService) {
     this.authService.token.subscribe(res => this.token = res);
   }
 

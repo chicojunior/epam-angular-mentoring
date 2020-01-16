@@ -84,7 +84,7 @@ loginRouter.post('/', (req, res, next) => {
 });
 
 const usersRoute = express.Router();
-usersRoute.use(authGuard);
+//usersRoute.use(authGuard);
 usersRoute.get('/', (req, res, next) => {
   res.json(data.users);
 });

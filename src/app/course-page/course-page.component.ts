@@ -5,7 +5,7 @@ import { switchMap, filter, debounceTime } from 'rxjs/operators';
 
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
-import { UtilsService } from '@app-common/services';
+import { UtilsService, AuthService } from '@app-common/services';
 
 @Component({
   selector: 'app-course-page',
@@ -17,7 +17,9 @@ export class CoursePageComponent implements OnInit {
 
   constructor(
     private courseService: CourseService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService,
+    private utilsService: UtilsService
   ) {}
 
   ngOnInit() {
@@ -26,11 +28,10 @@ export class CoursePageComponent implements OnInit {
   }
 
   getList() {
-    // this.utilsService.showLoader(true);
-    this.courseService.getCourseList().subscribe(res => {
-      this.courses = res;
-      // this.utilsService.showLoader(false);
-    });
+    this.courseService.getCourseList()
+      .subscribe(res => {
+        this.courses = res;
+      });
   }
 
   courseSearchSubscription() {
@@ -52,8 +53,7 @@ export class CoursePageComponent implements OnInit {
       .pipe(
         filter(canDelete => canDelete),
         switchMap(() => this.courseService.deleteCourse(courseId))
-      )
-      .subscribe(() => this.getList());
+      ).subscribe(() => this.getList());
   }
 
   search(query: string) {
@@ -61,11 +61,11 @@ export class CoursePageComponent implements OnInit {
   }
 
   searchCourse(query: string): void {
-    // this.utilsService.showLoader(true);
-    this.courseService.filterCourses(query).subscribe(res => {
-      this.courses = res;
-      // this.utilsService.showLoader(false);
-    });
+    this.courseService
+      .filterCourses(query)
+      .subscribe(res => {
+        this.courses = res;
+      });
   }
 
   loadMore(evt: MouseEvent) {
