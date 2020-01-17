@@ -44,13 +44,7 @@ export class CourseService {
     return this.http
       .get<Course[]>(`${this.BASE_URL}/courses`, {
         params: { title_like: filterString }
-      })
-      .pipe(
-        map(
-          data => data,
-          error => console.log(error)
-        )
-      );
+      });
   }
 
   updateCourse(updatedCourse: Course): Observable<Course[]> {

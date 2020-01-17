@@ -11,7 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 
 import { Course } from '@app-common/course.interface';
 import { COURSES } from '@app-common/mock/courses';
@@ -26,6 +26,7 @@ import { CoursePageComponent } from './course-page.component';
 
 class MockCourseService {
   res: Course[] = COURSES;
+  searchInput: Observable<string> = of('');
 
   getCourseList() {
     return of(this.res);

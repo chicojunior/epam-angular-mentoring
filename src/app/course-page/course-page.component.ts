@@ -6,6 +6,7 @@ import { switchMap, filter, debounceTime } from 'rxjs/operators';
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
 import { UtilsService, AuthService } from '@app-common/services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-page',
@@ -14,6 +15,7 @@ import { UtilsService, AuthService } from '@app-common/services';
 })
 export class CoursePageComponent implements OnInit {
   public courses: Course[] = [];
+  subscriptions: Subscription[] = [];
 
   constructor(
     private courseService: CourseService,
@@ -28,14 +30,15 @@ export class CoursePageComponent implements OnInit {
   }
 
   getList() {
-    this.courseService.getCourseList()
+    this.courseService
+      .getCourseList()
       .subscribe(res => {
         this.courses = res;
       });
   }
 
-  courseSearchSubscription() {
-    this.courseService.searchInput
+  courseSearchSubscription(): Subscription {
+    return this.courseService.searchInput
       .pipe(
         filter(input => input.length >= 3 || input === ''),
         debounceTime(600)
@@ -60,11 +63,11 @@ export class CoursePageComponent implements OnInit {
     this.courseService.searchCourses(query);
   }
 
-  searchCourse(query: string): void {
+  searchCourse(query: string) {
     this.courseService
       .filterCourses(query)
-      .subscribe(res => {
-        this.courses = res;
+      .subscribe((courseList: Course[]) => {
+        this.courses = courseList;
       });
   }
 
