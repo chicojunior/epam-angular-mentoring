@@ -6,7 +6,7 @@ import { COURSES } from '@app-common/mock/courses';
 
 import { CourseService } from './course.service';
 
-xdescribe('CourseService', () => {
+describe('CourseService', () => {
 
   let service: CourseService;
 

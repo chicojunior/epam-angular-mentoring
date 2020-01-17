@@ -37,13 +37,14 @@ export class CoursePageComponent implements OnInit {
       });
   }
 
-  courseSearchSubscription(): Subscription {
-    return this.courseService.searchInput
+  courseSearchSubscription() {
+    this.courseService.searchInput
       .pipe(
         filter(input => input.length >= 3 || input === ''),
-        debounceTime(600)
+        debounceTime(600),
+        switchMap(query => this.courseService.filterCourses(query))
       )
-      .subscribe(query => this.searchCourse(query));
+      .subscribe(courseList => this.courses = courseList);
   }
 
   addCourse(): void {
@@ -61,14 +62,6 @@ export class CoursePageComponent implements OnInit {
 
   search(query: string) {
     this.courseService.searchCourses(query);
-  }
-
-  searchCourse(query: string) {
-    this.courseService
-      .filterCourses(query)
-      .subscribe((courseList: Course[]) => {
-        this.courses = courseList;
-      });
   }
 
   loadMore(evt: MouseEvent) {

@@ -35,6 +35,10 @@ class MockCourseService {
   setCourses() {
     this.res = COURSES;
   }
+
+  filterCourses(query: string) {
+    return of([]);
+  }
 }
 
 describe('CoursePageComponent', () => {
