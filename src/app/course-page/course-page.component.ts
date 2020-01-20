@@ -34,47 +34,29 @@ export class CoursePageComponent implements OnInit {
   ngOnInit() {
     this.store.dispatch(getAllCourses());
     this.courses$ = this.store.pipe(select(coursesSelector));
-    // this.getList();
-    // this.courseSearchSubscription();
-  }
-
-  getList() {
-    this.courseService
-      .getCourseList()
-      .subscribe(res => {
-        this.courses = res;
-      });
-  }
-
-  courseSearchSubscription() {
-    this.courseService.searchInput
-      .pipe(
-        filter(input => input.length >= 3 || input === ''),
-        debounceTime(600),
-        switchMap(query => this.courseService.filterCourses(query))
-      )
-      .subscribe(courseList => this.courses = courseList);
   }
 
   addCourse(): void {
     this.router.navigate(['courses/new']);
   }
 
-  deleteCourse(courseId: string) {
-    this.courseService
-      .deleteCourseConfirmation()
-      .pipe(
-        filter(canDelete => canDelete),
-        switchMap(() => this.courseService.deleteCourse(courseId))
-      ).subscribe(() => this.getList());
-  }
+  // deleteCourse(courseId: string) {
+  //   this.courseService
+  //     .deleteCourseConfirmation()
+  //     .pipe(
+  //       filter(canDelete => canDelete),
+  //       switchMap(() => this.courseService.deleteCourse(courseId))
+  //     ).subscribe(() => this.getList());
+  // }
 
   search(query: string) {
     this.courseService.searchCourses(query);
   }
 
   search$(input: string) {
-    this.store.dispatch(searchCourses({ query: input }));
+    if (input.length >= 3 || input === '') {
+      this.store.dispatch(searchCourses({ query: input }));
+    }
   }
 
   loadMore(evt: MouseEvent) {

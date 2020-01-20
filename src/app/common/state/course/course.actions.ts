@@ -7,7 +7,10 @@ export enum CourseActionTypes {
   GetAllCoursesFailure = '[Course] GetAllCourses Failure',
   SearchCourses = '[Course] SearchCourses',
   SearchCoursesSuccess = '[Course] SearchCourses Success',
-  SearchCoursesFailure = '[Course] SearchCourses Failure'
+  SearchCoursesFailure = '[Course] SearchCourses Failure',
+  AddCourse = '[Course] AddCourse',
+  AddCourseSuccess = '[Course] AddCourse Success',
+  AddCourseFailure = '[Course] AddCourse Failure'
 }
 
 export const getAllCourses = createAction(
@@ -16,14 +19,13 @@ export const getAllCourses = createAction(
 
 export const getAllCoursesSuccess = createAction(
   CourseActionTypes.GetAllCoursesSuccess,
-  props<{ courses: Course[] }>()
+  props<{ payload: Course[] }>()
 );
 
 export const getAllCoursesFailure = createAction(
   CourseActionTypes.GetAllCoursesFailure,
   props<{ error: any }>()
 );
-
 
 export const searchCourses = createAction(
   CourseActionTypes.SearchCourses,
@@ -32,10 +34,25 @@ export const searchCourses = createAction(
 
 export const searchCoursesSuccess = createAction(
   CourseActionTypes.SearchCoursesSuccess,
-  props<{ filteredCourses: Course[] }>()
+  props<{ payload: Course[] }>()
 );
 
 export const searchCoursesFailure = createAction(
   CourseActionTypes.SearchCoursesFailure,
+  props<{ error: any }>()
+);
+
+export const addCourse = createAction(
+  CourseActionTypes.AddCourse,
+  props<{ payload: Course }>()
+);
+
+export const addCourseSuccess = createAction(
+  CourseActionTypes.AddCourseSuccess,
+  props<{ payload: Course[] }>()
+);
+
+export const addCourseFailure = createAction(
+  CourseActionTypes.AddCourseFailure,
   props<{ error: any }>()
 );

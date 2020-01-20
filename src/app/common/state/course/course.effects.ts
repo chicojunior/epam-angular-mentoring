@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 
@@ -9,6 +8,7 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { CourseService } from '../../services';
 
 import * as CourseActions from './course.actions';
+import { Course } from '@app-common/course.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +48,28 @@ export class CourseEffect {
       ),
       switchMap(action =>
         this.courseService.filterCourses(action.query).pipe(
+          map(res => ({
+            type: CourseActions.CourseActionTypes.SearchCoursesSuccess,
+            payload: res
+          })),
+          catchError(err =>
+            of({
+              type: CourseActions.CourseActionTypes.SearchCoursesFailure,
+              payload: err
+            })
+          )
+        )
+      )
+    )
+  );
+
+  addCourses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<{ type: any; payload: Course }>(
+        CourseActions.CourseActionTypes.AddCourse
+      ),
+      switchMap(action =>
+        this.courseService.addCourse(action.payload).pipe(
           map(res => ({
             type: CourseActions.CourseActionTypes.SearchCoursesSuccess,
             payload: res

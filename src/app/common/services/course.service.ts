@@ -21,7 +21,9 @@ export class CourseService {
   protected BASE_URL = environment.BASE_URL;
 
   public courses: Observable<Course[]> = this.coursesSubject.asObservable();
-  public searchInput: Observable<string> = this.searchInputSubject.asObservable();
+  public searchInput: Observable<
+    string
+  > = this.searchInputSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -41,10 +43,9 @@ export class CourseService {
   }
 
   filterCourses(filterString: string): Observable<Course[]> {
-    return this.http
-      .get<Course[]>(`${this.BASE_URL}/courses`, {
-        params: { title_like: filterString }
-      });
+    return this.http.get<Course[]>(`${this.BASE_URL}/courses`, {
+      params: { title_like: filterString }
+    });
   }
 
   updateCourse(updatedCourse: Course): Observable<Course[]> {

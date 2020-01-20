@@ -18,9 +18,13 @@ const initialState: CourseState = {
 
 const courseReducer = createReducer(
   initialState,
-  on(CourseActions.getAllCoursesSuccess, state => ({
+  on(CourseActions.getAllCoursesSuccess, (state, action) => ({
     ...state,
-    courseList: state.courseList
+    courseList: action.payload
+  })),
+  on(CourseActions.searchCoursesSuccess, (state, action) => ({
+    ...state,
+    courseList: action.payload
   }))
 );
 
