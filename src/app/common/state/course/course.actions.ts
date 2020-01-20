@@ -4,7 +4,10 @@ import { Course } from '@app-common/course.interface';
 export enum CourseActionTypes {
   GetAllCourses = '[Course] GetAllCourses',
   GetAllCoursesSuccess = '[Course] GetAllCourses Success',
-  GetAllCoursesFailure = '[Course] GetAllCourses Failure'
+  GetAllCoursesFailure = '[Course] GetAllCourses Failure',
+  SearchCourses = '[Course] SearchCourses',
+  SearchCoursesSuccess = '[Course] SearchCourses Success',
+  SearchCoursesFailure = '[Course] SearchCourses Failure'
 }
 
 export const getAllCourses = createAction(
@@ -13,10 +16,26 @@ export const getAllCourses = createAction(
 
 export const getAllCoursesSuccess = createAction(
   CourseActionTypes.GetAllCoursesSuccess,
-  props<{ allCourses: Course[] }>()
+  props<{ courses: Course[] }>()
 );
 
 export const getAllCoursesFailure = createAction(
   CourseActionTypes.GetAllCoursesFailure,
+  props<{ error: any }>()
+);
+
+
+export const searchCourses = createAction(
+  CourseActionTypes.SearchCourses,
+  props<{ query: string }>()
+);
+
+export const searchCoursesSuccess = createAction(
+  CourseActionTypes.SearchCoursesSuccess,
+  props<{ filteredCourses: Course[] }>()
+);
+
+export const searchCoursesFailure = createAction(
+  CourseActionTypes.SearchCoursesFailure,
   props<{ error: any }>()
 );

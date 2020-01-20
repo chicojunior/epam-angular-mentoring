@@ -1,12 +1,17 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { select, Store } from '@ngrx/store';
+
+import { Subscription, Observable } from 'rxjs';
 import { switchMap, filter, debounceTime } from 'rxjs/operators';
 
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
 import { UtilsService, AuthService } from '@app-common/services';
-import { Subscription } from 'rxjs';
+
+import { coursesSelector } from '@app-common/state/course/course.reducer';
+import { getAllCourses, searchCourses } from '@app-common/state/course/course.actions';
 
 @Component({
   selector: 'app-course-page',
@@ -15,18 +20,22 @@ import { Subscription } from 'rxjs';
 })
 export class CoursePageComponent implements OnInit {
   public courses: Course[] = [];
+  public courses$: Observable<Course[]>;
   subscriptions: Subscription[] = [];
 
   constructor(
     private courseService: CourseService,
     private router: Router,
     private authService: AuthService,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private store: Store<any>
   ) {}
 
   ngOnInit() {
-    this.getList();
-    this.courseSearchSubscription();
+    this.store.dispatch(getAllCourses());
+    this.courses$ = this.store.pipe(select(coursesSelector));
+    // this.getList();
+    // this.courseSearchSubscription();
   }
 
   getList() {
@@ -62,6 +71,10 @@ export class CoursePageComponent implements OnInit {
 
   search(query: string) {
     this.courseService.searchCourses(query);
+  }
+
+  search$(input: string) {
+    this.store.dispatch(searchCourses({ query: input }));
   }
 
   loadMore(evt: MouseEvent) {
