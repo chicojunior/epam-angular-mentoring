@@ -48,8 +48,15 @@ export class CourseService {
     });
   }
 
-  updateCourse(updatedCourse: Course): Observable<Course[]> {
-    return this.getCourseList().pipe();
+  updateCourse(updatedCourse: Course): Observable<any> {
+    return this.http.post(`${this.BASE_URL}/courses/${updatedCourse.id}`, updatedCourse).pipe(
+      map(
+        data => {
+          console.log('POST call successful value returned in body', data);
+        },
+        error => console.log('Error', error)
+      )
+    );
   }
 
   deleteCourseConfirmation(): Observable<boolean> {

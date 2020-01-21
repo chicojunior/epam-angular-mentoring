@@ -25,6 +25,10 @@ const courseReducer = createReducer(
   on(CourseActions.searchCoursesSuccess, (state, action) => ({
     ...state,
     courseList: action.payload
+  })),
+  on(CourseActions.addCourseSuccess, (state, action) => ({
+    ...state,
+    courseList: action.payload
   }))
 );
 

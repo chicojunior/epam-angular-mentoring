@@ -71,7 +71,7 @@ export class CourseEffect {
       switchMap(action =>
         this.courseService.addCourse(action.payload).pipe(
           map(res => ({
-            type: CourseActions.CourseActionTypes.SearchCoursesSuccess,
+            type: CourseActions.CourseActionTypes.AddCourseSuccess,
             payload: res
           })),
           catchError(err =>
@@ -84,4 +84,27 @@ export class CourseEffect {
       )
     )
   );
+
+  updateCourses$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<{ type: any; payload: Course }>(
+        CourseActions.CourseActionTypes.UpdateCourse
+      ),
+      switchMap(action =>
+        this.courseService.addCourse(action.payload).pipe(
+          map(res => ({
+            type: CourseActions.CourseActionTypes.UpdateCourseSuccess,
+            payload: res
+          })),
+          catchError(err =>
+            of({
+              type: CourseActions.CourseActionTypes.UpdateCourseFailure,
+              payload: err
+            })
+          )
+        )
+      )
+    )
+  );
+
 }
