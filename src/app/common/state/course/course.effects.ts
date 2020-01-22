@@ -63,6 +63,27 @@ export class CourseEffect {
     )
   );
 
+  updateCourse$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<{ type: string; payload: Course }>(
+        CourseActions.CourseActionTypes.UpdateCourse
+      ),
+      switchMap(action =>
+        this.courseService.updateCourse(action.payload).pipe(
+          map(() => ({
+            type: CourseActions.CourseActionTypes.GetAllCourses
+          })),
+          catchError(err =>
+            of({
+              type: CourseActions.CourseActionTypes.SearchCoursesFailure,
+              payload: err
+            })
+          )
+        )
+      )
+    )
+  );
+
   addCourses$ = createEffect(() =>
     this.actions$.pipe(
       ofType<{ type: any; payload: Course }>(
@@ -76,7 +97,7 @@ export class CourseEffect {
           })),
           catchError(err =>
             of({
-              type: CourseActions.CourseActionTypes.SearchCoursesFailure,
+              type: CourseActions.CourseActionTypes.AddCourseFailure,
               payload: err
             })
           )
@@ -85,20 +106,19 @@ export class CourseEffect {
     )
   );
 
-  updateCourses$ = createEffect(() =>
+  deleteCourses$ = createEffect(() =>
     this.actions$.pipe(
-      ofType<{ type: any; payload: Course }>(
-        CourseActions.CourseActionTypes.UpdateCourse
+      ofType<{ type: any; payload: string }>(
+        CourseActions.CourseActionTypes.DeleteCourse
       ),
       switchMap(action =>
-        this.courseService.addCourse(action.payload).pipe(
-          map(res => ({
-            type: CourseActions.CourseActionTypes.UpdateCourseSuccess,
-            payload: res
+        this.courseService.deleteCourse(action.payload).pipe(
+          map(() => ({
+            type: CourseActions.CourseActionTypes.GetAllCourses
           })),
           catchError(err =>
             of({
-              type: CourseActions.CourseActionTypes.UpdateCourseFailure,
+              type: CourseActions.CourseActionTypes.DeleteCourseFailure,
               payload: err
             })
           )
@@ -106,5 +126,29 @@ export class CourseEffect {
       )
     )
   );
+
+  deleteCoursesConfirmation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<{ type: any; }>(
+        CourseActions.CourseActionTypes.DeleteCourseConfirmation
+      ),
+      switchMap(() =>
+        this.courseService.deleteCourseConfirmation().pipe(
+          map(res => ({
+            type: CourseActions.CourseActionTypes.DeleteCourseConfirmationSuccess,
+            payload: res
+          })),
+          catchError(err =>
+            of({
+              type: CourseActions.CourseActionTypes.DeleteCourseConfirmationFailure,
+              payload: err
+            })
+          )
+        )
+      )
+    )
+  );
+
+
 
 }

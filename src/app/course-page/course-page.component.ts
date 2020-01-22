@@ -4,14 +4,14 @@ import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 
 import { Subscription, Observable } from 'rxjs';
-import { switchMap, filter, debounceTime } from 'rxjs/operators';
+import { switchMap, filter, debounceTime, tap } from 'rxjs/operators';
 
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
 import { UtilsService, AuthService } from '@app-common/services';
 
 import { coursesSelector } from '@app-common/state/course/course.reducer';
-import { getAllCourses, searchCourses } from '@app-common/state/course/course.actions';
+import { getAllCourses, searchCourses, deleteCourse } from '@app-common/state/course/course.actions';
 
 @Component({
   selector: 'app-course-page',
@@ -40,14 +40,14 @@ export class CoursePageComponent implements OnInit {
     this.router.navigate(['courses/new']);
   }
 
-  // deleteCourse(courseId: string) {
-  //   this.courseService
-  //     .deleteCourseConfirmation()
-  //     .pipe(
-  //       filter(canDelete => canDelete),
-  //       switchMap(() => this.courseService.deleteCourse(courseId))
-  //     ).subscribe(() => this.getList());
-  // }
+  deleteCourse(courseId: string) {
+    this.courseService
+      .deleteCourseConfirmation()
+      .pipe(
+        filter(canDelete => canDelete),
+        tap(() => this.store.dispatch(deleteCourse({ payload: courseId })))
+      ).subscribe(console.log, console.error);
+  }
 
   search(query: string) {
     this.courseService.searchCourses(query);

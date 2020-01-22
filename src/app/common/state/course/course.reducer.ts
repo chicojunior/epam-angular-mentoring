@@ -29,6 +29,10 @@ const courseReducer = createReducer(
   on(CourseActions.addCourseSuccess, (state, action) => ({
     ...state,
     courseList: action.payload
+  })),
+  on(CourseActions.deleteCourseSuccess, (state, action) => ({
+    ...state,
+    courseList: action.payload
   }))
 );
 

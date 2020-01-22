@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services';
 import { CourseState } from '@app-common/state/course/course.reducer';
-import { addCourse } from '@app-common/state/actions';
+import { addCourse, updateCourse } from '@app-common/state/actions';
 
 
 @Component({
@@ -44,7 +44,7 @@ export class CourseAddComponent implements OnInit {
 
   saveCourse(): void {
     if (this.id) {
-      this.courseService.updateCourse(this.course).subscribe(res => console.log(res));
+      this.store.dispatch(updateCourse({ payload: this.course }));
     } else {
       this.store.dispatch(addCourse({ payload: this.course }));
     }
