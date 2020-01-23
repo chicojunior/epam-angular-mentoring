@@ -4,6 +4,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AuthService, UtilsService } from '@app-common/services';
 import { map, switchMap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+
+import { login } from '@app-common/state/auth/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +18,11 @@ export class LoginComponent implements OnInit {
   public userPassword: string;
   public isLogged: boolean;
 
-  constructor(private authService: AuthService, private utils: UtilsService) {
+  constructor(
+    private authService: AuthService,
+    private utils: UtilsService,
+    private store: Store<any>
+  ) {
     this.authService.isLogged.subscribe(logged => {
       this.isLogged = logged;
     });
@@ -28,9 +35,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.authService
-      .login(this.userEmail, this.userPassword)
-      .pipe(switchMap(() => this.authService.getUserInfo()))
-      .subscribe();
+    this.store.dispatch(login({ email: this.userEmail, password: this.userPassword }));
+    // this.authService
+    //   .login(this.userEmail, this.userPassword)
+    //   .pipe(switchMap(() => this.authService.getUserInfo()))
+    //   .subscribe();
   }
 }

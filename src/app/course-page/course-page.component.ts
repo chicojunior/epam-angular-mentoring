@@ -1,17 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { select, Store } from '@ngrx/store';
-
-import { Subscription, Observable } from 'rxjs';
-import { switchMap, filter, debounceTime, tap } from 'rxjs/operators';
-
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
-import { UtilsService, AuthService } from '@app-common/services';
-
+import { deleteCourse, getAllCourses, searchCourses } from '@app-common/state/course/course.actions';
 import { coursesSelector } from '@app-common/state/course/course.reducer';
-import { getAllCourses, searchCourses, deleteCourse } from '@app-common/state/course/course.actions';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-course-page',
@@ -19,15 +15,12 @@ import { getAllCourses, searchCourses, deleteCourse } from '@app-common/state/co
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit {
-  public courses: Course[] = [];
+
   public courses$: Observable<Course[]>;
-  subscriptions: Subscription[] = [];
 
   constructor(
     private courseService: CourseService,
     private router: Router,
-    private authService: AuthService,
-    private utilsService: UtilsService,
     private store: Store<any>
   ) {}
 
@@ -49,11 +42,7 @@ export class CoursePageComponent implements OnInit {
       ).subscribe(console.log, console.error);
   }
 
-  search(query: string) {
-    this.courseService.searchCourses(query);
-  }
-
-  search$(input: string) {
+  search(input: string) {
     if (input.length >= 3 || input === '') {
       this.store.dispatch(searchCourses({ query: input }));
     }
@@ -61,7 +50,6 @@ export class CoursePageComponent implements OnInit {
 
   loadMore(evt: MouseEvent) {
     evt.preventDefault();
-    console.log(evt);
   }
 
   isNotEmptyString(str: string): boolean {

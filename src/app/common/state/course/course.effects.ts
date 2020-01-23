@@ -127,28 +127,5 @@ export class CourseEffect {
     )
   );
 
-  deleteCoursesConfirmation$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType<{ type: any; }>(
-        CourseActions.CourseActionTypes.DeleteCourseConfirmation
-      ),
-      switchMap(() =>
-        this.courseService.deleteCourseConfirmation().pipe(
-          map(res => ({
-            type: CourseActions.CourseActionTypes.DeleteCourseConfirmationSuccess,
-            payload: res
-          })),
-          catchError(err =>
-            of({
-              type: CourseActions.CourseActionTypes.DeleteCourseConfirmationFailure,
-              payload: err
-            })
-          )
-        )
-      )
-    )
-  );
-
-
 
 }

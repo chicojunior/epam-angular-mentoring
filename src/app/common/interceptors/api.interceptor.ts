@@ -4,15 +4,20 @@ import {
   HttpHandler,
   HttpEvent
 } from '@angular/common/http';
+
+import { Store, select } from '@ngrx/store';
+
 import { Observable } from 'rxjs';
 
-import { AuthService, UtilsService } from '@app-common/services';
-import { IUser } from '@app-common/user.interface';
+import { AuthService } from '@app-common/services';
+import { tokenSelector } from '@app-common/state/auth/auth.reducer';
+
 
 export class ApiInterceptor implements HttpInterceptor {
   token: string;
+  storeToken$: Observable<string>;
 
-  constructor(private authService: AuthService, private utils: UtilsService) {
+  constructor(private authService: AuthService, private store: Store<any>) {
     this.authService.token.subscribe(res => this.token = res);
   }
 

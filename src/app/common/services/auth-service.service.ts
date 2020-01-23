@@ -32,7 +32,7 @@ export class AuthService {
     this.isUserChecked = false;
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<string> {
     return this.http
       .post(`${environment.BASE_URL}/login`, { email, password })
       .pipe(
@@ -42,7 +42,7 @@ export class AuthService {
             this.isLoggedSubject.next(true);
             this.goToCourses();
             console.log('Logged in successfully!');
-            return token;
+            return token as string;
           },
           error => {
             console.log('Error', error);
@@ -74,14 +74,12 @@ export class AuthService {
   }
 
   getUserInfo(): Observable<any> {
-    return this.http
-      .get(`${environment.BASE_URL}/users`)
-      .pipe(
-        map(
-          userList => this.userSubject.next(userList[0]),
-          error => console.log('Error', error)
-        )
-      );
+    return this.http.get(`${environment.BASE_URL}/users`).pipe(
+      map(
+        userList => this.userSubject.next(userList[0]),
+        error => console.log('Error', error)
+      )
+    );
   }
 
   cleanData(): void {
