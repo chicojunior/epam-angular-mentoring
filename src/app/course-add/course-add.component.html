@@ -49,15 +49,22 @@
         <div class="row input-sm">
           <span class="required">*required</span>
           <app-duration-input
+            [courseDurationInput]="course.duration"
             (courseDurationOutput)="setCourseDuration($event)"
           ></app-duration-input>
         </div>
 
         <div class="row input-sm">
           <span class="required">*required</span>
-          <app-date-input
-            (courseDateOutput)="setCourseDate($event)"
-          ></app-date-input>
+          <app-date-input formControlName="creationDate"></app-date-input>
+          <div *ngIf="courseForm.get('creationDate').invalid">
+            <mat-error *ngIf="courseForm.get('creationDate').errors.required">
+              Course date creation is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="courseForm.get('creationDate').errors.dateIsFormated">
+              Course date creation should be formatted as: dd/mm/yyyy
+            </mat-error>
+          </div>
         </div>
 
         <div class="row input-md">

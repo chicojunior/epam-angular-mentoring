@@ -1,27 +1,41 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormControl, Validators} from '@angular/forms';
+import {Component, OnInit, EventEmitter, Output, forwardRef, HostBinding, Input, OnChanges} from '@angular/core';
+import { FormControl, Validators, ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import { ValidateDate } from '@app-common/validators/date.validator';
 
 @Component({
   selector: 'app-date-input',
   templateUrl: './date-input.component.html',
-  styleUrls: ['./date-input.component.scss']
+  styleUrls: ['./date-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DateInputComponent),
+      multi: true
+    }
+  ]
 })
-export class DateInputComponent implements OnInit {
+export class DateInputComponent implements ControlValueAccessor {
+  @Input() value: string;
 
-  // courseDate_: Date;
-  courseDate: FormControl;
-
-  @Output() courseDateOutput: EventEmitter<Date> = new EventEmitter();
+  onChange = (date: string) => {};
+  onTauched = () => {};
 
   constructor() { }
 
-  ngOnInit() {
-    this.courseDate = new FormControl('', [Validators.required, ValidateDate]);
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
   }
 
-  setCourseDate() {
-    this.courseDateOutput.emit(new Date(this.courseDate.value));
+  registerOnTouched(fn: any): void {
+    this.onTauched = fn;
   }
 
+  writeValue(date: string): void {
+    this.value = date;
+    this.onChange(this.value);
+  }
+
+  valueChange(value: string) {
+    this.writeValue(value);
+  }
 }
