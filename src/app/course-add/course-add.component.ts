@@ -33,7 +33,7 @@ export class CourseAddComponent implements OnInit {
 
   ngOnInit() {
     this.courseForm = this.fb.group({
-      title: ['', Validators.required],
+      title: ['', [Validators.required, Validators.maxLength(50)]],
       description: ['', [Validators.required, Validators.maxLength(500)]]
     });
     this.route.params.subscribe(params => {

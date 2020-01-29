@@ -3,7 +3,6 @@
     <mat-card-header>
       <mat-card-title>{{ pageTitle }}</mat-card-title>
     </mat-card-header>
-
     <mat-card-content>
       <form [formGroup]="courseForm" (ngSubmit)="submit()">
         <div class="row">
@@ -19,62 +18,68 @@
               matInput
               placeholder="Add title"
               formControlName="title"
-              required
             />
-            <mat-error *ngIf="courseForm.controls.title.errors.required">
+            <mat-error *ngIf="courseForm.get('title').errors && courseForm.get('title').errors.required">
               Course title is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="courseForm.get('title').errors && courseForm.get('title').errors.maxlength">
+              The course title can't be longer than 50 characters
             </mat-error>
           </mat-form-field>
         </div>
-      </form>
 
-      <div class="row">
-        <span class="required">*required</span>
-        <mat-form-field appearance="outline" class="full-size" color="primary">
-          <mat-label>Description</mat-label>
-          <textarea
-            matInput
-            rows="8"
-            placeholder="Add description"
-            [(ngModel)]="course.description"
-          >
+        <div class="row">
+          <span class="required">*required</span>
+          <mat-form-field appearance="outline" class="full-size" color="primary">
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              rows="8"
+              placeholder="Add description"
+              required
+              formControlName="description"
+            >
           </textarea>
-        </mat-form-field>
-      </div>
+            <mat-error *ngIf="courseForm.get('description').errors && courseForm.get('description').errors.required">
+              Course description is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row input-sm">
-        <span class="required">*required</span>
-        <app-duration-input
-          (courseDurationOutput)="setCourseDuration($event)"
-        ></app-duration-input>
-      </div>
+        <div class="row input-sm">
+          <span class="required">*required</span>
+          <app-duration-input
+            (courseDurationOutput)="setCourseDuration($event)"
+          ></app-duration-input>
+        </div>
 
-      <div class="row input-sm">
-        <span class="required">*required</span>
-        <app-date-input
-          (courseDateOutput)="setCourseDate($event)"
-        ></app-date-input>
-      </div>
+        <div class="row input-sm">
+          <span class="required">*required</span>
+          <app-date-input
+            (courseDateOutput)="setCourseDate($event)"
+          ></app-date-input>
+        </div>
 
-      <div class="row input-md">
-        <span class="required">*required</span>
-        <app-authors-input></app-authors-input>
-      </div>
+        <div class="row input-md">
+          <span class="required">*required</span>
+          <app-authors-input></app-authors-input>
+        </div>
 
-      <div class="action-row">
-        <button class="cancel-btn" (click)="cancel()" mat-flat-button>
-          Cancel
-        </button>
-        <button
-          class="save-btn"
-          color="primary"
-          [disabled]="!courseForm.valid"
-          mat-flat-button
-          type="submit"
-        >
-          {{ buttonAction }}
-        </button>
-      </div>
+        <div class="action-row">
+          <button class="cancel-btn" (click)="cancel()" mat-flat-button>
+            Cancel
+          </button>
+          <button
+            class="save-btn"
+            color="primary"
+            [disabled]="!courseForm.valid"
+            mat-flat-button
+            type="submit"
+          >
+            {{ buttonAction }}
+          </button>
+        </div>
+      </form>
     </mat-card-content>
   </mat-card>
 </section>

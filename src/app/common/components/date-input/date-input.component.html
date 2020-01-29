@@ -2,9 +2,15 @@
   <mat-label>Date</mat-label>
   <input
     matInput
-    type="date"
-    placeholder="mm-dd-yyyy"
+    type="text"
+    placeholder="mm/dd/yyyy"
     (blur)="setCourseDate()"
-    [(ngModel)]="courseDate"
+    [formControl]="courseDate"
   />
+  <mat-error *ngIf="courseDate.errors && courseDate.errors.required">
+    Course date is <strong>required</strong>
+  </mat-error>
+  <mat-error *ngIf="courseDate.errors && courseDate.errors.dateIsFormated">
+    Please set the date in this format: mm/dd/yyyy!
+  </mat-error>
 </mat-form-field>

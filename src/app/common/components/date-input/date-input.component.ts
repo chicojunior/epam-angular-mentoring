@@ -1,4 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormControl, Validators} from '@angular/forms';
+import { ValidateDate } from '@app-common/validators/date.validator';
 
 @Component({
   selector: 'app-date-input',
@@ -7,17 +9,19 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class DateInputComponent implements OnInit {
 
-  courseDate: Date;
+  // courseDate_: Date;
+  courseDate: FormControl;
 
   @Output() courseDateOutput: EventEmitter<Date> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
+    this.courseDate = new FormControl('', [Validators.required, ValidateDate]);
   }
 
   setCourseDate() {
-    this.courseDateOutput.emit(new Date(this.courseDate));
+    this.courseDateOutput.emit(new Date(this.courseDate.value));
   }
 
 }
