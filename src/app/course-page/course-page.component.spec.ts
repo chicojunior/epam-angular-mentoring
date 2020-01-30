@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 
+import { Store, StoreModule } from '@ngrx/store';
+
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -66,6 +68,7 @@ describe('CoursePageComponent', () => {
       ],
       providers: [
         { provide: Router, useValue: {} },
+        { provide: Store, useValue: {} },
         { provide: CourseService, useClass: MockCourseService }
       ]
     })

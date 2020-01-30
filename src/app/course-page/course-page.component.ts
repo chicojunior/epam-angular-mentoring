@@ -1,12 +1,13 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { switchMap, filter, debounceTime } from 'rxjs/operators';
-
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
-import { UtilsService, AuthService } from '@app-common/services';
-import { Subscription } from 'rxjs';
+import { deleteCourse, getAllCourses, searchCourses } from '@app-common/state/course/course.actions';
+import { coursesSelector } from '@app-common/state/course/course.reducer';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-course-page',
@@ -14,37 +15,18 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./course-page.component.scss']
 })
 export class CoursePageComponent implements OnInit {
-  public courses: Course[] = [];
-  subscriptions: Subscription[] = [];
+
+  public courses$: Observable<Course[]>;
 
   constructor(
     private courseService: CourseService,
     private router: Router,
-    private authService: AuthService,
-    private utilsService: UtilsService
+    private store: Store<any>
   ) {}
 
   ngOnInit() {
-    this.getList();
-    this.courseSearchSubscription();
-  }
-
-  getList() {
-    this.courseService
-      .getCourseList()
-      .subscribe(res => {
-        this.courses = res;
-      });
-  }
-
-  courseSearchSubscription() {
-    this.courseService.searchInput
-      .pipe(
-        filter(input => input.length >= 3 || input === ''),
-        debounceTime(600),
-        switchMap(query => this.courseService.filterCourses(query))
-      )
-      .subscribe(courseList => this.courses = courseList);
+    this.store.dispatch(getAllCourses());
+    this.courses$ = this.store.pipe(select(coursesSelector));
   }
 
   addCourse(): void {
@@ -56,17 +38,18 @@ export class CoursePageComponent implements OnInit {
       .deleteCourseConfirmation()
       .pipe(
         filter(canDelete => canDelete),
-        switchMap(() => this.courseService.deleteCourse(courseId))
-      ).subscribe(() => this.getList());
+        tap(() => this.store.dispatch(deleteCourse({ payload: courseId })))
+      ).subscribe(console.log, console.error);
   }
 
-  search(query: string) {
-    this.courseService.searchCourses(query);
+  search(input: string) {
+    if (input.length >= 3 || input === '') {
+      this.store.dispatch(searchCourses({ query: input }));
+    }
   }
 
   loadMore(evt: MouseEvent) {
     evt.preventDefault();
-    console.log(evt);
   }
 
   isNotEmptyString(str: string): boolean {

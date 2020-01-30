@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services';
+import { CourseState } from '@app-common/state/course/course.reducer';
+import { addCourse, updateCourse } from '@app-common/state/actions';
+
 
 @Component({
   selector: 'app-course-add',
@@ -12,12 +17,13 @@ import { CourseService } from '@app-common/services';
 export class CourseAddComponent implements OnInit {
   public pageTitle = '';
   public id: string;
-  public course = new Course();
+  public course: Course = new Course();
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private courseService: CourseService
+    private courseService: CourseService,
+    private store: Store<CourseState>
   ) {
     this.course.init();
   }
@@ -38,9 +44,9 @@ export class CourseAddComponent implements OnInit {
 
   saveCourse(): void {
     if (this.id) {
-      this.courseService.updateCourse(this.course).subscribe(res => console.log(res));
+      this.store.dispatch(updateCourse({ payload: this.course }));
     } else {
-      this.courseService.addCourse(this.course).subscribe(res => console.log(res));
+      this.store.dispatch(addCourse({ payload: this.course }));
     }
     this.goToCoursesList();
   }
