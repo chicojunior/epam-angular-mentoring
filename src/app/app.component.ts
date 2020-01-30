@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '@app-common/services';
+import { AuthService, UtilsService } from '@app-common/services';
 
 
 @Component({
@@ -11,11 +11,13 @@ import { AuthService } from '@app-common/services';
 export class AppComponent implements OnInit {
 
   public isLogged: boolean;
+  public isLoading: boolean;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private utilsService: UtilsService) {}
 
   ngOnInit(): void {
     this.authService.isLogged.subscribe(res => this.isLogged = res);
+    // this.utilsService.loader.subscribe(showLoader => this.isLoading = showLoader);
   }
 
 }

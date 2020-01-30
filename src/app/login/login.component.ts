@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { AuthService } from '@app-common/services';
-
+import { AuthService, UtilsService } from '@app-common/services';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +11,15 @@ import { AuthService } from '@app-common/services';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
   public userEmail: string;
   public userPassword: string;
   public isLogged: boolean;
 
-  constructor(private authService: AuthService, private loader: NgxSpinnerService) {
-    this.authService.isLogged
-      .subscribe(logged => {
-        this.isLogged = logged;
-      });
-   }
+  constructor(private authService: AuthService, private utils: UtilsService) {
+    this.authService.isLogged.subscribe(logged => {
+      this.isLogged = logged;
+    });
+  }
 
   ngOnInit() {
     if (this.isLogged) {
@@ -30,9 +28,9 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loader.show();
     this.authService
-      .login(this.userEmail, this.userPassword);
+      .login(this.userEmail, this.userPassword)
+      .pipe(switchMap(() => this.authService.getUserInfo()))
+      .subscribe();
   }
-
 }

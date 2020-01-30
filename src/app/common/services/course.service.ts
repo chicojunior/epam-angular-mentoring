@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Course } from '../course.interface';
@@ -16,9 +16,12 @@ import { UtilsService } from './utils.service';
 })
 export class CourseService {
   protected coursesSubject: BehaviorSubject<Course[]> = new BehaviorSubject([]);
+  public searchInputSubject: BehaviorSubject<string> = new BehaviorSubject('');
+
   protected BASE_URL = environment.BASE_URL;
 
   public courses: Observable<Course[]> = this.coursesSubject.asObservable();
+  public searchInput: Observable<string> = this.searchInputSubject.asObservable();
 
   constructor(
     private http: HttpClient,
@@ -41,13 +44,7 @@ export class CourseService {
     return this.http
       .get<Course[]>(`${this.BASE_URL}/courses`, {
         params: { title_like: filterString }
-      })
-      .pipe(
-        map(
-          data => data,
-          error => console.log(error)
-        )
-      );
+      });
   }
 
   updateCourse(updatedCourse: Course): Observable<Course[]> {
@@ -79,6 +76,10 @@ export class CourseService {
 
   setCourses(courses: Course[]): void {
     this.coursesSubject.next(courses);
+  }
+
+  searchCourses(query: string): void {
+    this.searchInputSubject.next(query);
   }
 
   getCourseById(courseId: string): Observable<Course> {

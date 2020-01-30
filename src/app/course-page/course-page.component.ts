@@ -1,35 +1,50 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { map, switchMap, filter, mergeMap, flatMap } from 'rxjs/operators';
+import { switchMap, filter, debounceTime } from 'rxjs/operators';
 
 import { Course } from '@app-common/course.interface';
 import { CourseService } from '@app-common/services/course.service';
-import { EMPTY } from 'rxjs';
+import { UtilsService, AuthService } from '@app-common/services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-page',
   templateUrl: './course-page.component.html',
   styleUrls: ['./course-page.component.scss']
 })
-export class CoursePageComponent implements OnInit, OnChanges {
+export class CoursePageComponent implements OnInit {
   public courses: Course[] = [];
-  public courseInput: string;
+  subscriptions: Subscription[] = [];
 
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private authService: AuthService,
+    private utilsService: UtilsService
+  ) {}
 
   ngOnInit() {
     this.getList();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.courseInput.length >= 3 || this.courseInput === '') {
-      this.searchCourse(this.courseInput);
-    }
+    this.courseSearchSubscription();
   }
 
   getList() {
-    this.courseService.getCourseList().subscribe(res => (this.courses = res));
+    this.courseService
+      .getCourseList()
+      .subscribe(res => {
+        this.courses = res;
+      });
+  }
+
+  courseSearchSubscription() {
+    this.courseService.searchInput
+      .pipe(
+        filter(input => input.length >= 3 || input === ''),
+        debounceTime(600),
+        switchMap(query => this.courseService.filterCourses(query))
+      )
+      .subscribe(courseList => this.courses = courseList);
   }
 
   addCourse(): void {
@@ -42,14 +57,11 @@ export class CoursePageComponent implements OnInit, OnChanges {
       .pipe(
         filter(canDelete => canDelete),
         switchMap(() => this.courseService.deleteCourse(courseId))
-      )
-      .subscribe(() => this.getList());
+      ).subscribe(() => this.getList());
   }
 
-  searchCourse(query: string): void {
-    this.courseService
-      .filterCourses(query)
-      .subscribe(res => (this.courses = res));
+  search(query: string) {
+    this.courseService.searchCourses(query);
   }
 
   loadMore(evt: MouseEvent) {
