@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import {Store} from '@ngrx/store';
+import { Store } from '@ngrx/store';
 
-import {Course} from '@app-common/course.interface';
-import {CourseService} from '@app-common/services';
-import {CourseState} from '@app-common/state/course/course.reducer';
-import {addCourse, updateCourse} from '@app-common/state/actions';
+import { Course } from '@app-common/course.interface';
+import { CourseService } from '@app-common/services';
+import { CourseState } from '@app-common/state/course/course.reducer';
+import { addCourse, updateCourse } from '@app-common/state/actions';
 
 import { ValidateDate } from '@app-common/validators/date.validator';
 
@@ -29,9 +29,7 @@ export class CourseAddComponent implements OnInit {
     private courseService: CourseService,
     private store: Store<CourseState>,
     private fb: FormBuilder
-  ) {
-    // this.course.init();
-  }
+  ) {}
 
   ngOnInit() {
     this.courseForm = this.fb.group({
@@ -50,13 +48,10 @@ export class CourseAddComponent implements OnInit {
         this.pageTitle = 'Edit Course';
         this.id = params.id;
         this.buttonAction = 'Update';
-        this.courseService
-          .getCourseById(params.id)
-          .subscribe(res => {
-            console.log(this.course);
-            this.course = res;
-            this.loadForm();
-          });
+        this.courseService.getCourseById(params.id).subscribe(res => {
+          this.course = res;
+          this.loadForm();
+        });
       } else {
         this.pageTitle = 'New Course';
         this.buttonAction = 'Save';
@@ -65,8 +60,7 @@ export class CourseAddComponent implements OnInit {
   }
 
   loadForm() {
-    console.log(this.course);
-    this.courseForm.patchValue({...this.course});
+    this.courseForm.patchValue({ ...this.course });
   }
 
   submit(): void {
@@ -75,9 +69,9 @@ export class CourseAddComponent implements OnInit {
       ...this.courseForm.value
     };
     this.course.creationDate = new Date(this.course.creationDate).toISOString();
-    this.id ?
-      this.store.dispatch(updateCourse({payload: this.course})) :
-      this.store.dispatch(addCourse({payload: this.course}));
+    this.id
+      ? this.store.dispatch(updateCourse({ payload: this.course }))
+      : this.store.dispatch(addCourse({ payload: this.course }));
 
     this.goToCoursesList();
   }

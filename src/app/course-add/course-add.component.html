@@ -19,10 +19,20 @@
               placeholder="Add title"
               formControlName="title"
             />
-            <mat-error *ngIf="courseForm.get('title').errors && courseForm.get('title').errors.required">
+            <mat-error
+              *ngIf="
+                courseForm.get('title').errors &&
+                courseForm.get('title').errors.required
+              "
+            >
               Course title is <strong>required</strong>
             </mat-error>
-            <mat-error *ngIf="courseForm.get('title').errors && courseForm.get('title').errors.maxlength">
+            <mat-error
+              *ngIf="
+                courseForm.get('title').errors &&
+                courseForm.get('title').errors.maxlength
+              "
+            >
               The course title can't be longer than 50 characters
             </mat-error>
           </mat-form-field>
@@ -30,7 +40,11 @@
 
         <div class="row">
           <span class="required">*required</span>
-          <mat-form-field appearance="outline" class="full-size" color="primary">
+          <mat-form-field
+            appearance="outline"
+            class="full-size"
+            color="primary"
+          >
             <mat-label>Description</mat-label>
             <textarea
               matInput
@@ -39,8 +53,13 @@
               required
               formControlName="description"
             >
-          </textarea>
-            <mat-error *ngIf="courseForm.get('description').errors && courseForm.get('description').errors.required">
+            </textarea>
+            <mat-error
+              *ngIf="
+                courseForm.get('description').errors &&
+                courseForm.get('description').errors.required
+              "
+            >
               Course description is <strong>required</strong>
             </mat-error>
           </mat-form-field>
@@ -61,7 +80,9 @@
             <mat-error *ngIf="courseForm.get('creationDate').errors.required">
               Course date creation is <strong>required</strong>
             </mat-error>
-            <mat-error *ngIf="courseForm.get('creationDate').errors.dateIsFormated">
+            <mat-error
+              *ngIf="courseForm.get('creationDate').errors.dateIsFormated"
+            >
               Course date creation should be formatted as: dd/mm/yyyy
             </mat-error>
           </div>

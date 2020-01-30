@@ -1,6 +1,6 @@
-import {Component, OnInit, EventEmitter, Output, forwardRef, HostBinding, Input, OnChanges} from '@angular/core';
-import { FormControl, Validators, ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
-import { ValidateDate } from '@app-common/validators/date.validator';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-date-input',
@@ -15,27 +15,37 @@ import { ValidateDate } from '@app-common/validators/date.validator';
   ]
 })
 export class DateInputComponent implements ControlValueAccessor {
+
   @Input() value: string;
 
-  onChange = (date: string) => {};
-  onTauched = () => {};
+  onChange = (dateChanged: string) => {};
+  onTouched = () => {};
 
-  constructor() { }
+  constructor() {}
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-    this.onTauched = fn;
+    this.onTouched = fn;
   }
 
   writeValue(date: string): void {
-    this.value = date;
+    this.value = this.formatDate(date);
     this.onChange(this.value);
   }
 
   valueChange(value: string) {
     this.writeValue(value);
+  }
+
+  formatDate(date: string) {
+    const mDate = moment(date);
+    let formatedDate = date;
+    if (mDate.isValid()) {
+      formatedDate = mDate.format('DD/MM/YYYY');
+    }
+    return formatedDate;
   }
 }
