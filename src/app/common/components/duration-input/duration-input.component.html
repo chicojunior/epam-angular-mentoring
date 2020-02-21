@@ -5,6 +5,9 @@
     type="number"
     placeholder="Minutes"
     (blur)="setCourseDuration()"
-    [(ngModel)]="courseDuration"
+    [formControl]="courseDuration"
   />
+  <mat-error *ngIf="courseDuration.errors && courseDuration.errors.required">
+    Course duration is <strong>required</strong>
+  </mat-error>
 </mat-form-field>

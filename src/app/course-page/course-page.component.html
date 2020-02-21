@@ -6,7 +6,8 @@
       <input
         matInput
         placeholder="Text to search"
-        (keyup)="search($event.target.value)"
+        [formControl]="searchInput"
+        (keyup)="search(searchInput.value)"
       />
     </mat-form-field>
   </div>
@@ -18,7 +19,10 @@
   </div>
 
   <div class="row course__list">
-    <app-course-list [courses]="courses$ | async" (courseDelete)="deleteCourse($event)">
+    <app-course-list
+      [courses]="courses$ | async"
+      (courseDelete)="deleteCourse($event)"
+    >
     </app-course-list>
   </div>
 </section>

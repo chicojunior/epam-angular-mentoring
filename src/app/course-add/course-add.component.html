@@ -3,64 +3,111 @@
     <mat-card-header>
       <mat-card-title>{{ pageTitle }}</mat-card-title>
     </mat-card-header>
-
     <mat-card-content>
-      <div class="row">
-        <span class="required">*required</span>
-        <mat-form-field
-          appearance="outline"
-          class="full-size"
-          color="primary">
-          <mat-label>Title</mat-label>
-          <input matInput placeholder="Add title"
-          [(ngModel)]="course.title"/>
-        </mat-form-field>
-      </div>
+      <form [formGroup]="courseForm" (ngSubmit)="submit()">
+        <div class="row">
+          <span class="required">*required</span>
+          <mat-form-field
+            appearance="outline"
+            class="full-size"
+            color="primary"
+          >
+            <mat-label>Title</mat-label>
+            <input
+              type="text"
+              matInput
+              placeholder="Add title"
+              formControlName="title"
+            />
+            <mat-error
+              *ngIf="
+                courseForm.get('title').errors &&
+                courseForm.get('title').errors.required
+              "
+            >
+              Course title is <strong>required</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="
+                courseForm.get('title').errors &&
+                courseForm.get('title').errors.maxlength
+              "
+            >
+              The course title can't be longer than 50 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row">
-        <span class="required">*required</span>
-        <mat-form-field
-          appearance="outline"
-          class="full-size"
-          color="primary">
-          <mat-label>Description</mat-label>
-          <textarea
-            matInput
-            rows="8"
-            placeholder="Add description"
-            [(ngModel)]="course.description">
-          </textarea>
-        </mat-form-field>
-      </div>
+        <div class="row">
+          <span class="required">*required</span>
+          <mat-form-field
+            appearance="outline"
+            class="full-size"
+            color="primary"
+          >
+            <mat-label>Description</mat-label>
+            <textarea
+              matInput
+              rows="8"
+              placeholder="Add description"
+              required
+              formControlName="description"
+            >
+            </textarea>
+            <mat-error
+              *ngIf="
+                courseForm.get('description').errors &&
+                courseForm.get('description').errors.required
+              "
+            >
+              Course description is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-      <div class="row input-sm">
-        <span class="required">*required</span>
-        <app-duration-input (courseDurationOutput)="setCourseDuration($event)"></app-duration-input>
-      </div>
+        <div class="row input-sm">
+          <span class="required">*required</span>
+          <app-duration-input
+            [courseDurationInput]="course.duration"
+            (courseDurationOutput)="setCourseDuration($event)"
+          ></app-duration-input>
+        </div>
 
-      <div class="row input-sm">
-        <span class="required">*required</span>
-        <app-date-input (courseDateOutput)="setCourseDate($event)"></app-date-input>
-      </div>
+        <div class="row input-sm">
+          <span class="required">*required</span>
+          <app-date-input formControlName="creationDate"></app-date-input>
+          <div *ngIf="courseForm.get('creationDate').invalid">
+            <mat-error *ngIf="courseForm.get('creationDate').errors.required">
+              Course date creation is <strong>required</strong>
+            </mat-error>
+            <mat-error
+              *ngIf="courseForm.get('creationDate').errors.dateIsFormated"
+            >
+              Course date creation should be formatted as: dd/mm/yyyy
+            </mat-error>
+          </div>
+        </div>
 
-      <div class="row input-md">
-        <span class="required">*required</span>
-        <app-authors-input></app-authors-input>
-      </div>
+        <div class="row input-md">
+          <span class="required">*required</span>
+          <app-authors-input></app-authors-input>
+        </div>
 
-      <div class="action-row">
-        <button
-          class="cancel-btn"
-          mat-flat-button
-          (click)="cancel()">Cancel</button>
-        <button
-          class="save-btn"
-          color="primary"
-          mat-flat-button
-          (click)="saveCourse()">
-          Save
-        </button>
-      </div>
+        <div class="action-row">
+          <button class="cancel-btn" (click)="cancel()" mat-flat-button>
+            Cancel
+          </button>
+          <button
+            class="save-btn"
+            color="primary"
+            [disabled]="!courseForm.valid"
+            mat-flat-button
+            type="submit"
+          >
+            {{ buttonAction }}
+          </button>
+        </div>
+      </form>
     </mat-card-content>
   </mat-card>
 </section>

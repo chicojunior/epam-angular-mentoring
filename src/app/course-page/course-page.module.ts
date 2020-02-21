@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -19,6 +19,7 @@ import { CoursePageComponent } from './course-page.component';
 const BASE_MODULES = [
   CommonModule,
   FormsModule,
+  ReactiveFormsModule,
   HttpClientModule
 ];
 
@@ -36,14 +37,9 @@ const FEATURE_MODULES = [
   CourseListModule
 ];
 
-
 @NgModule({
   declarations: [CoursePageComponent],
-  imports: [
-    BASE_MODULES,
-    MATERIAL_MODULES,
-    FEATURE_MODULES
-  ],
+  imports: [BASE_MODULES, MATERIAL_MODULES, FEATURE_MODULES],
   exports: [CoursePageComponent]
 })
-export class CoursePageModule { }
+export class CoursePageModule {}

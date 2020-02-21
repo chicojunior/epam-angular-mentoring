@@ -2,9 +2,9 @@
   <mat-label>Date</mat-label>
   <input
     matInput
-    type="date"
-    placeholder="mm-dd-yyyy"
-    (blur)="setCourseDate()"
-    [(ngModel)]="courseDate"
+    type="text"
+    placeholder="dd/mm/yyyy"
+    [value]="value"
+    (change)="valueChange($event.target.value)"
   />
 </mat-form-field>

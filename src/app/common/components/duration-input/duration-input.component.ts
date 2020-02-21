@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-duration-input',
@@ -7,15 +8,19 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class DurationInputComponent implements OnInit {
 
-  courseDuration: number;
-
+  @Input() courseDurationInput: number;
   @Output() courseDurationOutput: EventEmitter<number> = new EventEmitter();
+
+  public courseDuration: FormControl;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.courseDurationInput);
+    this.courseDuration = new FormControl(this.courseDurationInput, Validators.required);
+  }
 
   setCourseDuration() {
-    this.courseDurationOutput.emit(this.courseDuration);
+    this.courseDurationOutput.emit(this.courseDuration.value);
   }
 }

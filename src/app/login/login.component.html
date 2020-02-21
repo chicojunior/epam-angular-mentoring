@@ -4,36 +4,51 @@
       <mat-card-title>Login</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div class="row">
-        <span class="required">*required</span>
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label>Email</mat-label>
-          <input
-            matInput
-            type="email"
-            placeholder="Enter e-mail"
-            [(ngModel)]="userEmail"
-          />
-        </mat-form-field>
-      </div>
-      <div class="row">
-        <span class="required">*required</span>
-        <mat-form-field appearance="outline" color="primary">
-          <mat-label>Password</mat-label>
-          <input
-            type="password"
-            matInput
-            placeholder="Enter password"
-            [(ngModel)]="userPassword"
-          />
-        </mat-form-field>
-      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="row">
+          <span class="required">*required</span>
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="Enter e-mail"
+              formControlName="email"
+            />
+            <mat-error
+              *ngIf="
+                loginForm.get('email').errors &&
+                loginForm.get('email').errors.required
+              "
+            >
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <span class="required">*required</span>
+          <mat-form-field appearance="outline" color="primary">
+            <mat-label>Email</mat-label>
+            <input
+              matInput
+              type="password"
+              placeholder="Enter password"
+              formControlName="password"
+            />
+            <mat-error
+              *ngIf="
+                loginForm.get('password').errors &&
+                loginForm.get('password').errors.required
+              "
+            >
+              Password is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </form>
       <div class="row action-row">
         <a href="" class="vc-login__link">Forgot password?</a>
-        <button
-          class="vc-login__button"
-          mat-button
-          (click)="login()">
+        <button class="vc-login__button" mat-button (click)="login()">
           Login
         </button>
       </div>
